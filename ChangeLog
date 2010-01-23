@@ -1,0 +1,14 @@
+ChangeLog
+
+This ChangeLog only lists change after the last release of PHP-UTF8 at 2007-08-12 03:20.
+
+* Version 0.5.1 - Friday 22nd, 2010.
+
+  - Cleaned up some code.
+
+  - Added utf8_sprintf/utf8_vprintf to UTF-8 library:
+    http://sourceforge.net/tracker/?func=detail&aid=1804663&group_id=142846&atid=753845
+  - Added utf8_wordwrap to UTF-8 library:
+    http://sourceforge.net/tracker/?func=detail&aid=1804661&group_id=142846&atid=753845
+  - Added utf8_html_entity_decode to the UTF-8 library:
+    http://sourceforge.net/tracker/?func=detail&aid=1783133&group_id=142846&atid=753845
