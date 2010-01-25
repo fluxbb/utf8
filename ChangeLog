@@ -4,9 +4,10 @@ This ChangeLog only lists change after the last release of PHP-UTF8 at 2007-08-1
 
 * Version 0.5.1 - Someday XXth, 2010.
 
-  - Cleaned up some code.
-  - Added utf8.php.
+  - Cleaned up and reformatted all the code.
+  - Added utf8.php and reformatted the code.
   - Renamed LICENCE to COPYING.
+  - Added VERSION for easy version checking.
 
   - Added utf8_sprintf/utf8_vprintf to UTF-8 library:
     http://sourceforge.net/tracker/?func=detail&aid=1804663&group_id=142846&atid=753845

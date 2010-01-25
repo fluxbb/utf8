@@ -1,0 +1,9 @@
+To do PHP-UTF8
+==============
+
+ - Add unit tests for utf8_sprintf, utf8_vprintf, utf8_wordwrap and utf8_html_entity_decode.
+ - Fix failed test cases (unit tests).
+ - Fix open bugs in the bugtracker: http://sourceforge.net/tracker/?group_id=142846
+ - Fix and add documentation. The perl file doesn't work here.
+ - Reformat the code of the unit tests and tidy up the markup.
+ - Take a look at http://www.phpunit.de/
