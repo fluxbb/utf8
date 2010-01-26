@@ -11,8 +11,8 @@
 * @package utf8
 * @subpackage Tests
 */
-require dirname(__FILE__).'/../config.php';
-require UTF8.'/ucwords.php';
+require_once dirname(__FILE__).'/../config.php';
+require_once UTF8.'/ucwords.php';
 
 /**
 * @package utf8

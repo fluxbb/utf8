@@ -6,23 +6,12 @@ if (!defined('UTF8'))
 if (!defined('UTF8DATA'))
 	define('UTF8DATA', dirname(__FILE__).'/data');
 
+// Testing against a particular "engine"
 if (!isset($_GET['engine']))
 	$_GET['engine'] = 'auto';
-
-// Testing against a particular "engine"
-switch ($_GET['engine'])
-{
-	case 'mbstring';
-		if (!function_exists('mb_strtolower'))
-			trigger_error('mbstring extension not detected on your system!', E_USER_ERROR);
-
-		mb_internal_encoding('UTF-8');
-		require UTF8.'/mbstring/core.php';
-	break;
-	case 'native':
-		require UTF8.'/utils/unicode.php';
-		require UTF8.'/native/core.php';
-	break;
-}
+elseif ($_GET['engine'] == 'mbstring')
+	define('UTF8_USE_MBSTRING', true);
+elseif ($_GET['engine'] == 'native')
+	define('UTF8_USE_NATIVE', true);
 
 require_once UTF8 . '/utf8.php';

@@ -11,8 +11,8 @@
 * @package utf8
 * @subpackage Tests
 */
-require dirname(__FILE__).'/../config.php';
-require UTF8.'/utils/unicode.php';
+require_once dirname(__FILE__).'/../config.php';
+require_once UTF8.'/utils/unicode.php';
 
 /**
 * @package utf8

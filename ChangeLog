@@ -5,6 +5,7 @@ This ChangeLog only lists change after the last release of PHP-UTF8 at 2007-08-1
 * Version 0.5.1 - Someday XXth, 2010.
 
   - Cleaned up and reformatted all the functions and tests.
+  - Fixed all deprecation errors.
   - Renamed LICENCE to COPYING.
   - Added VERSION for easy version checking.
 
