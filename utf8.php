@@ -32,15 +32,20 @@ unset($UTF8_ar);
 if (!defined('UTF8'))
 	define('UTF8', dirname(__FILE__));
 
-/**
-* If string overloading is active, it will break many of the
-* native implementations. mbstring.func_overload must be set
-* to 0, 1 or 4 in php.ini (string overloading disabled).
-* Also need to check we have the correct internal mbstring
-* encoding
-*/
-if (defined('UTF8_USE_MBSTRING') || extension_loaded('mbstring'))
+if (extension_loaded('mbstring') && !defined('UTF8_USE_MBSTRING') && !defined('UTF8_USE_NATIVE'))
+	define('UTF8_USE_MBSTRING', true);
+
+if (defined('UTF8_USE_MBSTRING'))
 {
+	echo 'Mbstring';
+
+	/**
+	* If string overloading is active, it will break many of the
+	* native implementations. mbstring.func_overload must be set
+	* to 0, 1 or 4 in php.ini (string overloading disabled).
+	* Also need to check we have the correct internal mbstring
+	* encoding
+	*/
 	if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING)
 		trigger_error('String functions are overloaded by mbstring', E_USER_ERROR);
 
@@ -50,8 +55,10 @@ if (defined('UTF8_USE_MBSTRING') || extension_loaded('mbstring'))
 	if (!defined('UTF8_CORE'))
 		require UTF8.'/mbstring/core.php';
 }
-else
+elseif (defined('UTF8_USE_NATIVE'))
 {
+	echo 'Native';
+
 	if (!defined('UTF8_CORE'))
 	{
 		require UTF8.'/utils/unicode.php';

@@ -12,6 +12,7 @@
 * @subpackage Tests
 */
 require_once dirname(__FILE__).'/../config.php';
+require_once UTF8.'/substr_replace.php'; // Is needed by utf8_ucwords_callback()
 require_once UTF8.'/ucwords.php';
 
 /**

@@ -26,9 +26,9 @@ class test_utf8_str_pad extends UnitTestCase
 		$toPad = '<IñtërnëT>'; // 10 characters
 		$padding = 'ø__'; // 4 characters
 
-		$this->assertEqual(utf8_str_pad($toPad, 20), $toPad.'		  ');
-		$this->assertEqual(utf8_str_pad($toPad, 20, ' ', STR_PAD_LEFT), '		  '.$toPad);
-		$this->assertEqual(utf8_str_pad($toPad, 20, ' ', STR_PAD_BOTH), '	 '.$toPad.'	 ');
+		$this->assertEqual(utf8_str_pad($toPad, 20), $toPad.'          ');
+		$this->assertEqual(utf8_str_pad($toPad, 20, ' ', STR_PAD_LEFT), '          '.$toPad);
+		$this->assertEqual(utf8_str_pad($toPad, 20, ' ', STR_PAD_BOTH), '     '.$toPad.'     ');
 
 		$this->assertEqual(utf8_str_pad($toPad, 10), $toPad);
 		$this->assertEqual(str_pad('5char', 4), '5char'); // str_pos won't truncate input string

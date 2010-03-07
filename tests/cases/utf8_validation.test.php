@@ -205,12 +205,14 @@ class test_utf8_compliant extends UnitTestCase
 		$this->assertFalse(utf8_compliant($str));
 	}
 
+	# NOTE: This one fails
 	function testInvalidFiveOctetSequence()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf8\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
 		$this->assertTrue(utf8_compliant($str));
 	}
 
+	# NOTE: This one fails
 	function testInvalidSixOctetSequence()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xfc\xa1\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";

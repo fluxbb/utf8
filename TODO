@@ -5,7 +5,4 @@ To do PHP-UTF8
  - Fix failed test cases (unit tests).
  - Fix open bugs in the bugtracker: http://sourceforge.net/tracker/?group_id=142846
  - Fix and add documentation. The perl file doesn't work here.
- - Reformat the code of the unit tests and tidy up the markup.
  - Take a look at http://www.phpunit.de/
- - tests/benchconfig.php: Fix engine selecting since require_once is not used.
- - tests/config.php: Fix engine selecting since require_once is not used

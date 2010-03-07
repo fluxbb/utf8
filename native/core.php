@@ -49,7 +49,7 @@ function utf8_strlen($str)
 */
 function utf8_strpos($str, $needle, $offset = false)
 {
-	if (!$offset)
+	if ($offset === false)
 	{
 		$ar = explode($needle, $str, 2);
 
@@ -92,7 +92,7 @@ function utf8_strpos($str, $needle, $offset = false)
 */
 function utf8_strrpos($str, $needle, $offset = false)
 {
-	if (!$offset)
+	if ($offset === false)
 	{
 		$ar = explode($needle, $str);
 
@@ -100,7 +100,7 @@ function utf8_strrpos($str, $needle, $offset = false)
 		{
 		    // Pop off the end of the string where the last match was made
 		    array_pop($ar);
-		    $str = join($needle,$ar);
+		    $str = join($needle, $ar);
 
 		    return utf8_strlen($str);
 		}

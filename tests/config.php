@@ -35,10 +35,16 @@ function & getTestReporter()
 
 // Testing against a particular "engine"
 if (!isset($_GET['engine']))
+{
 	$_GET['engine'] = 'auto';
+}
 elseif ($_GET['engine'] == 'mbstring')
+{
 	define('UTF8_USE_MBSTRING', true);
+}
 elseif ($_GET['engine'] == 'native')
+{
 	define('UTF8_USE_NATIVE', true);
+}
 
 require_once UTF8.'/utf8.php';

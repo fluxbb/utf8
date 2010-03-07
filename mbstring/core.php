@@ -38,7 +38,7 @@ function utf8_strlen($str)
 */
 function utf8_strpos($str, $search, $offset = false)
 {
-	if (!$offset)
+	if ($offset === false)
 		return mb_strpos($str, $search);
 	else
 		return mb_strpos($str, $search, $offset);
@@ -95,7 +95,7 @@ function utf8_strrpos($str, $search, $offset = false)
 */
 function utf8_substr($str, $offset, $length = false)
 {
-	if (!$length)
+	if ($length === false)
 		return mb_substr($str, $offset);
 	else
 		return mb_substr($str, $offset, $length);
