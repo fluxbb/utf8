@@ -36,11 +36,10 @@ class test_utf8_strrpos extends UnitTestCase
 		$this->assertEqual(utf8_strrpos($str, 'n', 11), 19);
 	}
 
-	# Mbstring says it is 16 and the Native implementation says it is 15
 	function testUtf8Invalid()
 	{
 		$str = "Iñtërnâtiôn\xe9àlizætiøn";
-		$this->assertEqual(utf8_strrpos($str, 'æ'), 16);
+		$this->assertEqual(utf8_strrpos($str, 'æ'), 15);
 	}
 
 	function testAscii()
