@@ -9,7 +9,7 @@ if (!defined('SIMPLE_TEST'))
 {
 	// Should point at SimpleTest (absolute path required with trailing slash)
 	// or to your include path
-	define('SIMPLE_TEST', 'E:/xampp/php/PEAR/simpletest/');
+	define('SIMPLE_TEST', '/opt/lampp/htdocs/simpletest/');
 }
 
 // Load SimpleTest and main JPSpan
