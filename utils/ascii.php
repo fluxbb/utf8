@@ -1,13 +1,14 @@
 <?php
 /**
- * Tools to help with ASCII in UTF-8
- * @version $Id: ascii.php,v 1.5 2006/10/16 20:38:12 harryf Exp $
- * @package utf8
- * @subpackage ascii
+ * Tools to help with ASCII in UTF-8.
+ *
+ * @package php-utf8
+ * @subpackage utils
  */
 
 /**
  * Tests whether a string contains only 7bit ASCII bytes.
+ *
  * You might use this to conditionally check whether a string
  * needs handling as UTF-8 or not, potentially offering performance
  * benefits by using the native PHP equivalent if it's just ASCII e.g.;
@@ -21,10 +22,8 @@
  * }
  * </code>
  *
- * @param string
+ * @param string $str 
  * @return boolean TRUE if it's all ASCII
- * @package utf8
- * @subpackage ascii
  * @see utf8_is_ascii_ctrl
  */
 function utf8_is_ascii($str)
@@ -34,14 +33,12 @@ function utf8_is_ascii($str)
 }
 
 /**
- * Tests whether a string contains only 7bit ASCII bytes with device
- * control codes omitted. The device control codes can be found on the
- * second table here: http://www.w3schools.com/tags/ref_ascii.asp
+ * Tests whether a string contains only 7bit ASCII bytes with device control codes omitted.
  *
- * @param string
+ * The device control codes can be found on the second table here: http://www.w3schools.com/tags/ref_ascii.asp
+ *
+ * @param string $str
  * @return boolean TRUE if it's all ASCII without device control codes
- * @package utf8
- * @subpackage ascii
  * @see utf8_is_ascii
  */
 function utf8_is_ascii_ctrl($str)
@@ -56,13 +53,12 @@ function utf8_is_ascii_ctrl($str)
 }
 
 /**
- * Strip out all non-7bit ASCII bytes
- * If you need to transmit a string to system which you know can only
- * support 7bit ASCII, you could use this function.
- * @param string
+ * Strip out all non-7bit ASCII bytes.
+ *
+ * If you need to transmit a string to system which you know can only support 7bit ASCII, you could use this function.
+ *
+ * @param string $str 
  * @return string with non ASCII bytes removed
- * @package utf8
- * @subpackage ascii
  * @see utf8_strip_non_ascii_ctrl
  */
 function utf8_strip_non_ascii($str)
@@ -86,12 +82,12 @@ function utf8_strip_non_ascii($str)
 }
 
 /**
- * Strip out device control codes in the ASCII range
- * which are not permitted in XML. Note that this leaves
- * multi-byte characters untouched - it only removes device
- * control codes
+ * Strip out device control codes in the ASCII range which are not permitted in XML.
+ * 
+ * Note that this leaves multi-byte characters untouched - it only removes device control codes
+ *
  * @see http://hsivonen.iki.fi/producing-xml/#controlchar
- * @param string
+ * @param string $str 
  * @return string control codes removed
  */
 function utf8_strip_ascii_ctrl($str)
@@ -116,13 +112,11 @@ function utf8_strip_ascii_ctrl($str)
 
 /**
  * Strip out all non 7bit ASCII bytes and ASCII device control codes.
- * For a list of ASCII device control codes see the 2nd table here:
- * http://www.w3schools.com/tags/ref_ascii.asp
  *
- * @param string
+ * For a list of ASCII device control codes see the 2nd table here: http://www.w3schools.com/tags/ref_ascii.asp
+ *
+ * @param string $str
  * @return boolean TRUE if it's all ASCII
- * @package utf8
- * @subpackage ascii
  */
 function utf8_strip_non_ascii_ctrl($str)
 {
@@ -146,25 +140,25 @@ function utf8_strip_non_ascii_ctrl($str)
 
 /**
  * Replace accented UTF-8 characters by unaccented ASCII-7 "equivalents".
- * The purpose of this function is to replace characters commonly found in Latin
- * alphabets with something more or less equivalent from the ASCII range. This can
- * be useful for converting a UTF-8 to something ready for a filename, for example.
+ *
+ * The purpose of this function is to replace characters commonly found in Latin 
+ * alphabets with something more or less equivalent from the ASCII range. 
+ * This can be useful for converting a UTF-8 to something ready for a filename,
+ * for example.
  * Following the use of this function, you would probably also pass the string
  * through utf8_strip_non_ascii to clean out any other non-ASCII chars
- * Use the optional parameter to just deaccent lower ($case = -1) or upper ($case = 1)
- * letters. Default is to deaccent both cases ($case = 0)
  *
- * For a more complete implementation of transliteration, see the utf8_to_ascii package
- * available from the phputf8 project downloads:
- * http://prdownloads.sourceforge.net/phputf8
+ * Use the optional parameter to just deaccent lower ($case = -1) or
+ * upper ($case = 1) letters. Default is to deaccent both cases ($case = 0)
  *
- * @param string UTF-8 string
- * @param int (optional) -1 lowercase only, +1 uppercase only, 1 both cases
+ * For a more complete implementation of transliteration, see the utf8_to_ascii
+ * package available from the phputf8 project downloads: http://prdownloads.sourceforge.net/phputf8
+ *
+ * @param string $str UTF-8 string
+ * @param int $case (optional) -1 lowercase only, +1 uppercase only, 1 both cases
  * @param string UTF-8 with accented characters replaced by ASCII chars
  * @return string accented chars replaced with ascii equivalents
  * @author Andreas Gohr <andi@splitbrain.org>
- * @package utf8
- * @subpackage ascii
  */
 function utf8_accents_to_ascii($str, $case=0)
 {

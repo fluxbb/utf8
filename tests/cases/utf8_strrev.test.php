@@ -12,7 +12,7 @@
 * @subpackage Tests
 */
 require_once dirname(__FILE__).'/../config.php';
-require_once UTF8.'/strrev.php';
+require_once UTF8.'/functions/strrev.php';
 
 /**
 * @package utf8

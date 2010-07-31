@@ -12,7 +12,7 @@
 * @subpackage Tests
 */
 require_once dirname(__FILE__).'/../config.php';
-require_once UTF8.'/strcasecmp.php';
+require_once UTF8.'/functions/strcasecmp.php';
 
 /**
 * @package utf8

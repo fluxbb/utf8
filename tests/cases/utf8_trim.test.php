@@ -12,7 +12,7 @@
 * @subpackage Tests
 */
 require_once dirname(__FILE__).'/../config.php';
-require_once UTF8.'/trim.php';
+require_once UTF8.'/functions/trim.php';
 
 /**
 * @package utf8

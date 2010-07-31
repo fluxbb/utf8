@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page bad.php</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/utils/bad.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+											<a href="#sec-constants">Constants</a>
+			|									<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tools for locating/replacing bad bytes in UTF-8 strings.</p>
+<p class="description"><p>The Original Code is Mozilla Communicator client code.  The Initial Developer of the Original Code is Netscape Communications Corporation.  Portions created by the Initial Developer are Copyright (C) 1998 the Initial Developer.  All Rights Reserved.</p><p>Ported to PHP by Henri Sivonen (http://hsivonen.iki.fi)  Slight modifications to fit with phputf8 library by Harry Fuecks (hfuecks gmail com)</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---validation.php.html#functionutf8_is_valid">utf8_is_valid()</a></li>
+				<li><span class="field">see:</span> <a href="http://hsivonen.iki.fi/php-utf8/">http://hsivonen.iki.fi/php-utf8/</a></li>
+				<li><span class="field">see:</span> <a href="http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUnicodeToUTF8.cpp">http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUnicodeToUTF8.cpp</a></li>
+				<li><span class="field">see:</span> <a href="http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUTF8ToUnicode.cpp">http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUTF8ToUnicode.cpp</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	
+	<a name="sec-constants"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+									<span class="disabled">Constants</span>
+			|										<a href="#sec-functions">Functions</a>
+					</div>
+		<div class="info-box-body">	
+			<a name="definePHP_UTF8_BAD_5OCTET"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_5OCTET</span> = 1
+			(line <span class="line-number">160</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify() when a five octet sequence is detected.</p>
+<p class="description"><p>Note: 5 octets sequences are valid UTF-8 but are not supported by Unicode so do not represent a useful character</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+<a name="definePHP_UTF8_BAD_6OCTET"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_6OCTET</span> = 2
+			(line <span class="line-number">169</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify() when a six octet sequence is detected.</p>
+<p class="description"><p>Note: 6 octets sequences are valid UTF-8 but are not supported by Unicode so do not represent a useful character</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+<a name="definePHP_UTF8_BAD_NONSHORT"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_NONSHORT</span> = 4
+			(line <span class="line-number">187</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify().</p>
+<p class="description"><p>From Unicode 3.1, non-shortest form is illegal.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+<a name="definePHP_UTF8_BAD_SEQID"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_SEQID</span> = 3
+			(line <span class="line-number">178</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify().</p>
+<p class="description"><p>Invalid octet for use as start of multi-byte UTF-8 sequence.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+<a name="definePHP_UTF8_BAD_SEQINCOMPLETE"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_SEQINCOMPLETE</span> = 7
+			(line <span class="line-number">213</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify().</p>
+<p class="description"><p>Incomplete multi-octet sequence  Note: this is kind of a &quot;catch-all&quot;</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+<a name="definePHP_UTF8_BAD_SURROGATE"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_SURROGATE</span> = 5
+			(line <span class="line-number">196</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify().</p>
+<p class="description"><p>From Unicode 3.2, surrogate characters are illegal.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+<a name="definePHP_UTF8_BAD_UNIOUTRANGE"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">PHP_UTF8_BAD_UNIOUTRANGE</span> = 6
+			(line <span class="line-number">203</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return code from utf8_bad_identify().</p>
+<p class="description"><p>Codepoints outside the Unicode range are illegal.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+		
+</div>
+		</div>
+	</div>
+	
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+													<a href="#sec-constants">Constants</a>
+				|									<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functionutf8_bad_explain" id="functionutf8_bad_explain"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">utf8_bad_explain</span> (line <span class="line-number">360</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Takes a return code from utf8_bad_identify() are returns a message (in English)  explaining what the problem is.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> string message or FALSE if return code unknown</li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_identify">utf8_bad_identify()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			utf8_bad_explain
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$code</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$code</span><span class="var-description">: return code from utf8_bad_identify</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionutf8_bad_find" id="functionutf8_bad_find"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">utf8_bad_find</span> (line <span class="line-number">30</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Locates the first bad byte in a UTF-8 string returning it's byte index in the string.</p>
+<p class="description"><p>PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms  Note: modified to include full ASCII range including control chars</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> integer byte index or FALSE if no bad found</li>
+				<li><span class="field">see:</span> <a href="http://www.w3.org/International/questions/qa-forms-utf-8">http://www.w3.org/International/questions/qa-forms-utf-8</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			utf8_bad_find
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionutf8_bad_findall" id="functionutf8_bad_findall"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">utf8_bad_findall</span> (line <span class="line-number">62</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Locates all bad bytes in a UTF-8 string and returns a list of their byte  index in the string.</p>
+<p class="description"><p>PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms  Note: modified to include full ASCII range including control chars</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> array of integers or FALSE if no bad found</li>
+				<li><span class="field">see:</span> <a href="http://www.w3.org/International/questions/qa-forms-utf-8">http://www.w3.org/International/questions/qa-forms-utf-8</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			utf8_bad_findall
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionutf8_bad_identify" id="functionutf8_bad_identify"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">utf8_bad_identify</span> (line <span class="line-number">226</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reports on the type of bad byte found in a UTF-8 string.</p>
+<p class="description"><p>Returns a status code on the first bad byte found</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> integer constant describing problem or FALSE if valid UTF-8</li>
+				<li><span class="field">author:</span> &lt;<a href="mailto:hsivonen@iki.fi">hsivonen@iki.fi</a>&gt;</li>
+				<li><span class="field">see:</span> <a href="http://hsivonen.iki.fi/php-utf8/">http://hsivonen.iki.fi/php-utf8/</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---bad.php.html#functionutf8_bad_explain">utf8_bad_explain()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			utf8_bad_identify
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$i</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span><span class="var-description">: UTF-8 encoded string</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$i</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionutf8_bad_replace" id="functionutf8_bad_replace"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">utf8_bad_replace</span> (line <span class="line-number">129</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replace bad bytes with an alternative character - ASCII character recommended is replacement char.</p>
+<p class="description"><p>PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms  Note: modified to include full ASCII range including control chars</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="http://www.w3.org/International/questions/qa-forms-utf-8">http://www.w3.org/International/questions/qa-forms-utf-8</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			utf8_bad_replace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$replace</span> = <span class="var-default">&#039;?&#039;</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span><span class="var-description">: string to search</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$replace</span><span class="var-description">: string to replace bad bytes with (defaults to '?') - use ASCII</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionutf8_bad_strip" id="functionutf8_bad_strip"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">utf8_bad_strip</span> (line <span class="line-number">98</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Strips out any bad bytes from a UTF-8 string and returns the rest.</p>
+<p class="description"><p>PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms.  Note: modified to include full ASCII range including control chars</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="http://www.w3.org/International/questions/qa-forms-utf-8">http://www.w3.org/International/questions/qa-forms-utf-8</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			utf8_bad_strip
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span>			</li>
+				</ul>
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 31 Jul 2010 22:06:58 +0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

@@ -1,37 +1,32 @@
 <?php
 /**
- * @version $Id: unicode.php,v 1.2 2006/02/26 13:20:44 harryf Exp $
  * Tools for conversion between UTF-8 and unicode
  * The Original Code is Mozilla Communicator client code.
- * The Initial Developer of the Original Code is
- * Netscape Communications Corporation.
+ * The Initial Developer of the Original Code is Netscape Communications Corporation.
  * Portions created by the Initial Developer are Copyright (C) 1998
  * the Initial Developer. All Rights Reserved.
  * Ported to PHP by Henri Sivonen (http://hsivonen.iki.fi)
  * Slight modifications to fit with phputf8 library by Harry Fuecks (hfuecks gmail com)
+ *
  * @see http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUTF8ToUnicode.cpp
  * @see http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUnicodeToUTF8.cpp
  * @see http://hsivonen.iki.fi/php-utf8/
- * @package utf8
- * @subpackage unicode
+ * @package php-utf8
+ * @subpackage utils
  */
 
 /**
- * Takes an UTF-8 string and returns an array of ints representing the
- * Unicode characters. Astral planes are supported ie. the ints in the
- * output can be > 0xFFFF. Occurrances of the BOM are ignored. Surrogates
- * are not allowed.
- * Returns false if the input string isn't a valid UTF-8 octet sequence
- * and raises a PHP error at level E_USER_WARNING
- * Note: this function has been modified slightly in this library to
- * trigger errors on encountering bad bytes
+ * Takes an UTF-8 string and returns an array of ints representing the Unicode characters.
+ * Astral planes are supported ie. the ints in the output can be > 0xFFFF.
+ * Occurrances of the BOM are ignored. Surrogates are not allowed.
+ * Returns false if the input string isn't a valid UTF-8 octet sequence and raises a PHP error at level E_USER_WARNING
+ * Note: this function has been modified slightly in this library to trigger errors on encountering bad bytes
+ *
  * @author <hsivonen@iki.fi>
- * @param string UTF-8 encoded string
+ * @param string $str UTF-8 encoded string
  * @return mixed array of unicode code points or FALSE if UTF-8 invalid
  * @see utf8_from_unicode
  * @see http://hsivonen.iki.fi/php-utf8/
- * @package utf8
- * @subpackage unicode
  */
 function utf8_to_unicode($str)
 {
@@ -168,23 +163,17 @@ function utf8_to_unicode($str)
 }
 
 /**
- * Takes an array of ints representing the Unicode characters and returns
- * a UTF-8 string. Astral planes are supported ie. the ints in the
- * input can be > 0xFFFF. Occurrances of the BOM are ignored. Surrogates
- * are not allowed.
- * Returns false if the input array contains ints that represent
- * surrogates or are outside the Unicode range
- * and raises a PHP error at level E_USER_WARNING
- * Note: this function has been modified slightly in this library to use
- * output buffering to concatenate the UTF-8 string (faster) as well as
- * reference the array by it's keys
- * @param array of unicode code points representing a string
- * @return mixed UTF-8 string or FALSE if array contains invalid code points
- * @author <hsivonen@iki.fi>
+ * Takes an array of ints representing the Unicode characters and returns a UTF-8 string.
+ * Astral planes are supported ie. the ints in the input can be > 0xFFFF.
+ * Occurrances of the BOM are ignored. Surrogates are not allowed.
+ * Returns false if the input array contains ints that represent surrogates or are outside the Unicode range and raises a PHP error at level E_USER_WARNING
+ * Note: this function has been modified slightly in this library to use output buffering to concatenate the UTF-8 string (faster) as well as reference the array by it's keys
+ *
  * @see utf8_to_unicode
  * @see http://hsivonen.iki.fi/php-utf8/
- * @package utf8
- * @subpackage unicode
+ * @param array $arr  Array of unicode code points representing a string
+ * @return mixed UTF-8 string or FALSE if array contains invalid code points
+ * @author <hsivonen@iki.fi>
  */
 function utf8_from_unicode($arr)
 {
