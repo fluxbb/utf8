@@ -7,8 +7,7 @@
 */
 
 // Define UTF8_CORE as required
-if (!defined('UTF8_CORE'))
-	define('UTF8_CORE', true);
+if (!defined('UTF8_CORE')) define('UTF8_CORE', true);
 
 // utf8_strpos() and utf8_strrpos() need utf8_bad_strip() to strip invalid
 // characters. Mbstring doesn't do this while the Native implementation does.

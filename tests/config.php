@@ -2,7 +2,7 @@
 
 if (!defined('SIMPLE_TEST'))
 	// Should point at SimpleTest (absolute path required with trailing slash)
-	define('SIMPLE_TEST', '/srv/http/nginx/php/simpletest/'); // Use your include path
+	define('SIMPLE_TEST', 'E:/xampp/php/PEAR/simpletest/'); // Use your include path
 
 if (!defined('UTF8'))
 	define('UTF8', realpath(dirname(__FILE__).'/../'));
