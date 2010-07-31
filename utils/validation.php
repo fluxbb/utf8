@@ -1,32 +1,27 @@
 <?php
 /**
- * @version $Id: validation.php,v 1.2 2006/02/26 13:20:44 harryf Exp $
  * Tools for validing a UTF-8 string is well formed.
  * The Original Code is Mozilla Communicator client code.
- * The Initial Developer of the Original Code is
- * Netscape Communications Corporation.
- * Portions created by the Initial Developer are Copyright (C) 1998
- * the Initial Developer. All Rights Reserved.
+ * The Initial Developer of the Original Code is Netscape Communications Corporation.
+ * Portions created by the Initial Developer are Copyright (C) 1998 the Initial Developer. All Rights Reserved.
  * Ported to PHP by Henri Sivonen (http://hsivonen.iki.fi)
  * Slight modifications to fit with phputf8 library by Harry Fuecks (hfuecks gmail com)
+ *
  * @see http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUTF8ToUnicode.cpp
  * @see http://lxr.mozilla.org/seamonkey/source/intl/uconv/src/nsUnicodeToUTF8.cpp
  * @see http://hsivonen.iki.fi/php-utf8/
- * @package utf8
- * @subpackage validation
+ * @package php-utf8
+ * @subpackage utils
  */
 
 /**
- * Tests a string as to whether it's valid UTF-8 and supported by the
- * Unicode standard
- * Note: this function has been modified to simple return true or false
+ * Tests a string as to whether it's valid UTF-8 and supported by the Unicode standard
+ *
  * @author <hsivonen@iki.fi>
- * @param string UTF-8 encoded string
- * @return boolean true if valid
  * @see http://hsivonen.iki.fi/php-utf8/
  * @see utf8_compliant
- * @package utf8
- * @subpackage validation
+ * @param string $str UTF-8 encoded string
+ * @return boolean TRUE if valid
  */
 function utf8_is_valid($str)
 {
@@ -153,23 +148,20 @@ function utf8_is_valid($str)
 }
 
 /**
- * Tests whether a string complies as UTF-8. This will be much
- * faster than utf8_is_valid, but will pass five and six octet
- * UTF-8 sequences, which are not supported by Unicode and
- * so cannot be displayed correctly in a browser. In other words
- * it is not as strict as utf8_is_valid but it's faster. If you use
- * is to validate user input, you place yourself at the risk that
- * attackers will be able to inject 5 and 6 byte sequences (which
- * may or may not be a significant risk, depending on what you are
- * are doing)
- * Note: Does not pass five and six octet UTF-8 sequences anymore in
- *       in the unit tests.
+ * Tests whether a string complies as UTF-8. This will be much faster than
+ * utf8_is_valid, but will pass five and six octet UTF-8 sequences,
+ * which are not supported by Unicode and so cannot be displayed correctly 
+ * in a browser. 
+ * In other words it is not as strict as utf8_is_valid but it's faster. 
+ * If you use is to validate user input, you place yourself at the risk
+ * that attackers will be able to inject 5 and 6 byte sequences (which may
+ * or may not be a significant risk, depending on what you are are doing)
+ * Note: Does not pass five and six octet UTF-8 sequences anymore in the unit tests.
+ * 
  * @see utf8_is_valid
  * @see http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php#54805
- * @param string UTF-8 string to check
+ * @param string $str UTF-8 string to check
  * @return boolean TRUE if string is valid UTF-8
- * @package utf8
- * @subpackage validation
  */
 function utf8_compliant($str)
 {

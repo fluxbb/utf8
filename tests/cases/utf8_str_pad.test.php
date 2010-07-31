@@ -12,7 +12,7 @@
 * @subpackage Tests
 */
 require_once dirname(__FILE__).'/../config.php';
-require_once UTF8.'/str_pad.php';
+require_once UTF8.'/functions/str_pad.php';
 
 /**
 * @author Oliver Saunders <oliver (a) osinternetservices.com>

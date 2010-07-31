@@ -1,30 +1,32 @@
 <?php
 /**
- * Utilities for processing "special" characters in UTF-8. "Special" largely means anything which would
- * be regarded as a non-word character, like ASCII control characters and punctuation. This has a "Roman"
- * bias - it would be unaware of modern Chinese "punctuation" characters for example.
+ * Utilities for processing "special" characters in UTF-8.
+ * 
+ * "Special" largely means anything which would be regarded as a non-word
+ * character, like ASCII control characters and punctuation.
+ * This has a "Roman" bias - it would be unaware of modern Chinese "punctuation"
+ * characters for example.
  * Note: requires utils/unicode.php to be loaded
- * @version $Id: specials.php,v 1.2 2006/10/16 21:13:59 harryf Exp $
- * @package utf8
+ *
+ * @package php-utf8
  * @subpackage utils
- * @see utf8_is_valid
  */
 
 /**
- * Used internally. Builds a PCRE pattern from the $UTF8_SPECIAL_CHARS
- * array defined in this file
- * The $UTF8_SPECIAL_CHARS should contain all special characters (non-letter/non-digit)
- * defined in the various local charsets - it's not a complete list of
- * non-alphanum characters in UTF-8. It's not perfect but should match most
- * cases of special chars.
- * This function adds the control chars 0x00 to 0x19 to the array of
- * special chars (they are not included in $UTF8_SPECIAL_CHARS)
- * @package utf8
- * @subpackage utils
- * @return string
+ * Builds a PCRE pattern from the $UTF8_SPECIAL_CHARS array defined in this file.
+ *
+ * The $UTF8_SPECIAL_CHARS should contain all special characters 
+ * (non-letter/non-digit) defined in the various local charsets - it's not a 
+ * complete list of non-alphanum characters in UTF-8.
+ * It's not perfect but should match most cases of special chars.
+ * This function adds the control chars 0x00 to 0x19 to the array of special
+ * chars (they are not included in $UTF8_SPECIAL_CHARS)
+ *
  * @see utf8_from_unicode
  * @see utf8_is_word_chars
  * @see utf8_strip_specials
+ * @access private
+ * @return string
  */
 function utf8_specials_pattern()
 {
@@ -92,16 +94,16 @@ function utf8_specials_pattern()
 }
 
 /**
- * Checks a string for whether it contains only word characters. This
- * is logically equivalent to the \w PCRE meta character. Note that
- * this is not a 100% guarantee that the string only contains alpha /
- * numeric characters but just that common non-alphanumeric are not
- * in the string, including ASCII device control characters.
- * @package utf8
- * @subpackage utils
- * @param string to check
- * @return boolean TRUE if the string only contains word characters
+ * Checks a string for whether it contains only word characters.
+ *
+ * This is logically equivalent to the \w PCRE meta character. 
+ * Note that this is not a 100% guarantee that the string only contains 
+ * alphanumeric characters but just that common non-alphanumeric aren't in the
+ * string, including ASCII device control characters.
+ *
  * @see utf8_specials_pattern
+ * @param string $str string to check
+ * @return boolean TRUE if the string only contains word characters
  */
 function utf8_is_word_chars($str)
 {
@@ -116,13 +118,11 @@ function utf8_is_word_chars($str)
  * it does not handle all possible non-alphanumeric characters and is
  * not intended is some kind of security / injection filter.
  *
- * @package utf8
- * @subpackage utils
+ * @see utf8_specials_pattern
  * @author Andreas Gohr <andi@splitbrain.org>
  * @param string $string The UTF8 string to strip of special chars
- * @param string (optional) $repl   Replace special with this string
+ * @param string $repl (optional) Replace special with this string
  * @return string with common non-alphanumeric characters removed
- * @see utf8_specials_pattern
  */
 function utf8_strip_specials($string, $repl='')
 {

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page native.php</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/core/native.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+		
+			</div>
+</div>
+		
+
+	
+	
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functionnative_strlen" id="functionnative_strlen"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">native_strlen</span> (line <span class="line-number">32</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Unicode aware replacement for strlen().</p>
+<p class="description"><p>Returns the number of characters in the string (not the number of bytes),  replacing multibyte characters with a single byte equivalent utf8_decode()  converts characters that are not in ISO-8859-1 to '?', which, for the purpose  of counting, is alright.  It's much faster than iconv_strlen</p><p>Note: this function does not count bad UTF-8 bytes in the string, they are ignored.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> number of UTF-8 characters in string</li>
+				<li><span class="field">author:</span> &lt;<a href="mailto:chernyshevsky">at hotmail dot com chernyshevsky at hotmail dot com</a>&gt;</li>
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.utf8-decode.php">http://www.php.net/manual/en/function.utf8-decode.php</a></li>
+				<li><span class="field">link:</span> <a href="http://www.php.net/manual/en/function.strlen.php">http://www.php.net/manual/en/function.strlen.php</a></li>
+				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strlen">utf8_strlen()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			native_strlen
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span><span class="var-description">: UTF-8 string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionnative_strpos" id="functionnative_strpos"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">native_strpos</span> (line <span class="line-number">51</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">UTF-8 aware alternative to strpos.</p>
+<p class="description"><p>Find position of first occurrence of a string.  This will get alot slower if offset is used.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> integer position or FALSE on failure</li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_substr">utf8_substr()</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strlen">utf8_strlen()</a></li>
+				<li><span class="field">see:</span> <a href="http://www.php.net/strpos">http://www.php.net/strpos</a></li>
+				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strpos">utf8_strpos()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			native_strpos
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$needle</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">false</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span><span class="var-description">: needle (you should validate this with utf8_is_valid)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$offset</span><span class="var-description">: offset in characters (from left)</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$needle</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionnative_strrpos" id="functionnative_strrpos"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">native_strrpos</span> (line <span class="line-number">95</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">UTF-8 aware alternative to strrpos.</p>
+<p class="description"><p>Find position of last occurrence of a char in a string.  This will get alot slower if offset is used</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> integer position or FALSE on failure</li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strlen">utf8_strlen()</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_substr">utf8_substr()</a></li>
+				<li><span class="field">see:</span> <a href="http://www.php.net/strrpos">http://www.php.net/strrpos</a></li>
+				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strrpos">utf8_strrpos()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			native_strrpos
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$needle</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">false</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span><span class="var-description">: haystack</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$needle</span><span class="var-description">: needle (you should validate this with utf8_is_valid)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$offset</span><span class="var-description">: (optional) offset (from left)</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionnative_strtolower" id="functionnative_strtolower"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">native_strtolower</span> (line <span class="line-number">296</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">UTF-8 aware alternative to strtolower.</p>
+<p class="description"><p>Make a string lowercase.</p><p>The concept of a characters &quot;case&quot; only exists is some alphabets such as  Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in  the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> either string in lowercase or FALSE is UTF-8 invalid</li>
+				<li><span class="field">author:</span> Andreas Gohr &lt;<a href="mailto:andi@splitbrain.org">andi@splitbrain.org</a>&gt;</li>
+				<li><span class="field">see:</span> <a href="http://www.unicode.org/reports/tr21/tr21-5.html">http://www.unicode.org/reports/tr21/tr21-5.html</a></li>
+				<li><span class="field">see:</span> <a href="http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php">http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---unicode.php.html#functionutf8_from_unicode">utf8_from_unicode()</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---unicode.php.html#functionutf8_to_unicode">utf8_to_unicode()</a></li>
+				<li><span class="field">see:</span> <a href="http://www.php.net/strtolower">http://www.php.net/strtolower</a></li>
+				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strtolower">utf8_strtolower()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			native_strtolower
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionnative_strtoupper" id="functionnative_strtoupper"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">native_strtoupper</span> (line <span class="line-number">386</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">UTF-8 aware alternative to strtoupper.</p>
+<p class="description"><p>Make a string uppercase.</p><p>The concept of a characters &quot;case&quot; only exists is some alphabets such as  Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in  the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> either string in lowercase or FALSE is UTF-8 invalid</li>
+				<li><span class="field">author:</span> Andreas Gohr &lt;<a href="mailto:andi@splitbrain.org">andi@splitbrain.org</a>&gt;</li>
+				<li><span class="field">see:</span> <a href="http://www.unicode.org/reports/tr21/tr21-5.html">http://www.unicode.org/reports/tr21/tr21-5.html</a></li>
+				<li><span class="field">see:</span> <a href="http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php">http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---unicode.php.html#functionutf8_from_unicode">utf8_from_unicode()</a></li>
+				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---unicode.php.html#functionutf8_to_unicode">utf8_to_unicode()</a></li>
+				<li><span class="field">see:</span> <a href="http://www.php.net/strtoupper">http://www.php.net/strtoupper</a></li>
+				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strtoupper">utf8_strtoupper()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			native_strtoupper
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functionnative_substr" id="functionnative_substr"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">native_substr</span> (line <span class="line-number">155</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">UTF-8 aware alternative to substr.</p>
+<p class="description"><p>Return part of a string given character offset (and optionally length)</p><p>Compared to substr, if offset or length are not integers, this version will  not complain but rather massages them into an integer.</p><p>Note on returned values: substr documentation states false can be returned  in some cases (e.g. offset &gt; string length) mb_substr never returns false,  it will return an empty string instead. This adopts the mb_substr approach.</p><p>Note on implementation: PCRE only supports repetitions of less than 65536,  in order to accept up to MAXINT values for offset and length, we'll repeat  a group of 65535 characters when needed.</p><p>Note on implementation: calculating the number of characters in the string  is a relatively expensive operation, so we only carry it out when necessary.  It isn't necessary for +ve offsets and no specified length</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> string or FALSE if failure</li>
+				<li><span class="field">author:</span> Chris Smith&lt;<a href="mailto:chris@jalakai.co.uk">chris@jalakai.co.uk</a>&gt;</li>
+				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_substr">utf8_substr()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			native_substr
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$length</span> = <span class="var-default">false</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$offset</span><span class="var-description">: number of UTF-8 characters offset (from left)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$length</span><span class="var-description">: (optional) length in UTF-8 characters from offset</span>			</li>
+				</ul>
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 31 Jul 2010 22:06:58 +0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
