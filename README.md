@@ -43,30 +43,8 @@ Parts of the code in this library come from other places, under different licens
 The authors involved have been contacted (see below).
 Attribution for which code came from elsewhere can be found in the source code itself.
 
- - Andreas Gohr / Chris Smith of Dokuwiki. There is a fair degree of collaboration/exchange of ideas and code between [Dokuwiki's UTF-8 library][6] and phputf8. Although Dokuwiki is released under GPL, its UTF-8 library is released under LGPL, hence no conflict with phputf8
- - Henri Sivonen ([site][7]) has also given permission for his code to be released under the terms of the LGPL. He ported a Unicode / UTF-8 converter from the Mozilla codebase to PHP, which is re-used in php-utf8.
-
-ToDo
-----
- - Add unit tests for utf8_sprintf, utf8_vprintf, utf8_wordwrap and utf8_html_entity_decode.
- - Take a look at http://www.phpunit.de/
- - Move the todo items to the github issue tracker.
- - Delete the ChangeLog below and the ToDo
-
-Changelog
----------
-This ChangeLog only lists change after the last release of PHP-UTF8 at 2007-08-12 03:20.
-
-* Version 0.5.1 - Someday XXth, 2010.
-
-  - Cleaned up and reformatted all the functions and tests.
-  - Fixed all deprecation errors.
-  - Renamed LICENCE to COPYING.
-  - Added VERSION for easy version checking.
-  - [Added utf8_sprintf/utf8_vprintf][8]
-  - [Added utf8_wordwrap][9]
-  - [Added utf8_html_entity_decode][10]
-
+ - Andreas Gohr / Chris Smith of Dokuwiki. *There is a fair degree of collaboration/exchange of ideas and code between [Dokuwiki's UTF-8 library][6] and phputf8. Although Dokuwiki is released under GPL, its UTF-8 library is released under LGPL, hence no conflict with phputf8*
+ - Henri Sivonen ([site][7]) *has also given permission for his code to be released under the terms of the LGPL. He ported a Unicode / UTF-8 converter from the Mozilla codebase to PHP, which is re-used in php-utf8.*
 
   [1]: http://github.com/FSX/php-utf8/issues
   [2]: http://www.phpwact.org/php/i18n/charsets
@@ -75,6 +53,3 @@ This ChangeLog only lists change after the last release of PHP-UTF8 at 2007-08-1
   [5]: http://hsivonen.iki.fi/producing-xml/#controlchar
   [6]: http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php
   [7]: http://hsivonen.iki.fi/php-utf8/
-  [8]: http://sourceforge.net/tracker/?func=detail&aid=1804663&group_id=142846&atid=753845
-  [9]: http://sourceforge.net/tracker/?func=detail&aid=1804661&group_id=142846&atid=753845
-  [10]: http://sourceforge.net/tracker/?func=detail&aid=1783133&group_id=142846&atid=753845
