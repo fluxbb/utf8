@@ -227,10 +227,10 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new GroupTest('utf8_validation');
+	$test = &new GroupTest('utf8_validation');
 	$test->addTestCase(new test_utf8_is_valid());
 	$test->addTestCase(new test_utf8_compliant());
 
-	$reporter = getTestReporter();
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

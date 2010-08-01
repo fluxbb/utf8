@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @version $Id: utf8_strpos.test.php,v 1.2 2006/02/24 23:33:10 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_strpos.test.php,v 1.2 2006/02/24 23:33:10 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_strpos extends UnitTestCase
 {
-
 	function test_utf8_strpos()
 	{
 		$this->UnitTestCase('utf8_strpos()');
@@ -58,18 +59,18 @@ class test_utf8_strpos extends UnitTestCase
 		$str = '';
 		$this->assertFalse(utf8_strpos($str, 'x'));
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_strpos();
-	$reporter = getTestReporter();
+	$test = &new test_utf8_strpos();
+
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

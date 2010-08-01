@@ -1,21 +1,25 @@
 <?php
+
 /**
- * @version $Id: utf8_ascii.test.php,v 1.9 2006/10/17 08:53:37 harryf Exp $
- * @package php-utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_ascii.test.php,v 1.9 2006/10/17 08:53:37 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'../utils/ascii.php';
 
 /**
- * 
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_is_ascii extends UnitTestCase
 {
-
 	function test_utf8_is_ascii()
 	{
 		$this->UnitTestCase('test_utf8_is_ascii()');
@@ -44,15 +48,14 @@ class test_utf8_is_ascii extends UnitTestCase
 		$str = '';
 		$this->assertTrue(utf8_is_ascii($str));
 	}
-
 }
 
 /**
- * 
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_strip_non_ascii extends UnitTestCase
 {
-
 	function test_utf8_strip_non_ascii()
 	{
 		$this->UnitTestCase('test_utf8_strip_non_ascii()');
@@ -81,15 +84,14 @@ class test_utf8_strip_non_ascii extends UnitTestCase
 		$str = '';
 		$this->assertEqual(utf8_strip_non_ascii($str), '');
 	}
-
 }
 
 /**
- *
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_strip_non_ascii_ctrl extends UnitTestCase
 {
-
 	function test_utf8_strip_non_ascii_ctrl()
 	{
 		$this->UnitTestCase('test_utf8_strip_non_ascii_ctrl');
@@ -100,15 +102,14 @@ class test_utf8_strip_non_ascii_ctrl extends UnitTestCase
 		$str = "a\x00ñ\x00c";
 		$this->assertEqual(utf8_strip_non_ascii_ctrl($str), 'ac');
 	}
-
 }
 
 /**
- * 
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_strip_ascii_ctrl extends UnitTestCase
 {
-
 	function test_utf8_strip_ascii_ctrl()
 	{
 		$this->UnitTestCase('test_utf8_strip_ascii_ctrl');
@@ -123,11 +124,11 @@ class test_utf8_strip_ascii_ctrl extends UnitTestCase
 }
 
 /**
- * 
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_accents_to_ascii extends UnitTestCase
 {
-
 	function test_utf8_accents_to_ascii()
 	{
 		$this->UnitTestCase('test_utf8_accents_to_ascii');
@@ -155,23 +156,23 @@ class test_utf8_accents_to_ascii extends UnitTestCase
 		$str = "ôÔ";
 		$this->assertEqual(utf8_accents_to_ascii($str, 0), 'oO');
 	}
-
 }
 
 /**
- * 
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new GroupTest('utf8_ascii');
+	$test = &new GroupTest('utf8_ascii');
 	$test->addTestCase(new test_utf8_is_ascii());
 	$test->addTestCase(new test_utf8_strip_non_ascii());
 	$test->addTestCase(new test_utf8_strip_non_ascii_ctrl());
 	$test->addTestCase(new test_utf8_strip_ascii_ctrl());
 	$test->addTestCase(new test_utf8_accents_to_ascii());
 
-	$reporter = getTestReporter();
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

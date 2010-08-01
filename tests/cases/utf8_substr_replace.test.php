@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @version $Id: utf8_substr_replace.test.php,v 1.3 2006/10/17 09:22:14 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_substr_replace.test.php,v 1.3 2006/10/17 09:22:14 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/functions/substr_replace.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_native_substr_replace extends UnitTestCase
 {
-
 	function test_utf8_native_substr_replace()
 	{
 		$this->UnitTestCase('utf8_str_split()');
@@ -65,18 +66,18 @@ class test_utf8_native_substr_replace extends UnitTestCase
 		$replaced = "Iñ\ntërnâtX\nY";
 		$this->assertEqual(utf8_substr_replace($str, "X\nY", 9), $replaced);
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_native_substr_replace();
-	$reporter = getTestReporter();
+	$test = &new test_utf8_native_substr_replace();
+
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

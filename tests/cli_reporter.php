@@ -8,21 +8,18 @@
 */
 
 if (! defined('ST_FAILDETAIL_SEPARATOR'))
-{
 	define('ST_FAILDETAIL_SEPARATOR', '->');
-}
 
 if (! defined('ST_FAILS_RETURN_CODE'))
-{
 	define('ST_FAILS_RETURN_CODE', 1);
-}
 
 if (version_compare(PHP_VERSION, '4.3.0', '<') || php_sapi_name() == 'cgi')
 {
 	define('STDOUT', fopen('php://stdout', 'w'));
 	define('STDERR', fopen('php://stderr', 'w'));
 
-	register_shutdown_function(create_function('', 'fclose(STDOUT); fclose(STDERR); return true;'));
+	register_shutdown_function(
+		create_function('', 'fclose(STDOUT); fclose(STDERR); return true;'));
 }
 
 // Minimal command line test displayer.  Writes fail details to STDERR.  Returns 0
@@ -36,9 +33,7 @@ class CLIReporter extends SimpleReporter
 		$this->SimpleReporter();
 
 		if (! is_null($faildetail_separator))
-		{
 			$this->setFailDetailSeparator($faildetail_separator);
-		}
 	}
 
 	function setFailDetailSeparator($separator)
@@ -65,7 +60,8 @@ class CLIReporter extends SimpleReporter
 	{
 		parent::paintFail($message);
 
-		fwrite(STDERR, 'FAIL'.$this->faildetail_separator.$this->_paintTestFailDetail($message));
+		fwrite(STDERR, 'FAIL'.$this->faildetail_separator.
+			$this->_paintTestFailDetail($message));
 	}
 
 	// Paint exception faildetail to STDERR.
@@ -73,7 +69,8 @@ class CLIReporter extends SimpleReporter
 	{
 		parent::paintException($message);
 
-		fwrite(STDERR, 'EXCEPTION'.$this->faildetail_separator.$this->_paintTestFailDetail($message));
+		fwrite(STDERR, 'EXCEPTION'.$this->faildetail_separator.
+			   $this->_paintTestFailDetail($message));
 	}
 
 	// Paint a footer with test case name, timestamp, counts of fails and exceptions
@@ -87,14 +84,10 @@ class CLIReporter extends SimpleReporter
 			$buffer .= $this->getPassCount().' passes';
 
 			if (0 < $this->getFailCount())
-			{
 				$buffer .= ', '.$this->getFailCount().' fails';
-			}
 
 			if (0 < $this->getExceptionCount())
-			{
 				$buffer .= ', '.$this->getExceptionCount().'exceptions';
-			}
 
 			$buffer .= ".\n";
 
@@ -102,8 +95,6 @@ class CLIReporter extends SimpleReporter
 			exit(ST_FAILS_RETURN_CODE);
 		}
 		else
-		{
 			fwrite(STDOUT, $buffer.$this->getPassCount().' passes.'.".\n");
-		}
 	}
 }

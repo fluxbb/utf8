@@ -9,7 +9,7 @@ if (!defined('SIMPLE_TEST'))
 {
 	// Should point at SimpleTest (absolute path required with trailing slash)
 	// or to your include path
-	define('SIMPLE_TEST', 'E:/xampp/php/PEAR/simpletest/');
+	define('SIMPLE_TEST', '/opt/lampp/htdocs/simpletest/');
 }
 
 // Load SimpleTest and main JPSpan
@@ -21,7 +21,7 @@ if (!file_exists(SIMPLE_TEST.'unit_tester.php'))
 require_once SIMPLE_TEST.'unit_tester.php';
 require_once SIMPLE_TEST.'mock_objects.php';
 
-function getTestReporter()
+function &getTestReporter()
 {
 	if (php_sapi_name() != 'cli')
 	{
@@ -30,7 +30,7 @@ function getTestReporter()
 	else
 	{
 		require dirname(__FILE__).'/cli_reporter.php';
-		$R = new CLIReporter();
+		$R = & new CLIReporter();
 	}
 
 	return $R;
@@ -46,4 +46,4 @@ elseif ($_GET['engine'] == 'mbstring' || $_GET['engine'] == 'native')
 	define('PHP_UTF8_MODE', $_GET['engine']);
 }
 
-require_once dirname(__FILE__).'/../php-utf8.php';
+require_once '../php-utf8.php';

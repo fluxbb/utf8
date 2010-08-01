@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @version $Id: utf8_stristr.test.php,v 1.2 2006/02/25 14:52:18 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_stristr.test.php,v 1.2 2006/02/25 14:52:18 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/functions/stristr.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_stristr extends UnitTestCase
 {
-
 	function test_utf8_stristr()
 	{
 		$this->UnitTestCase('test_utf8_stristr()');
@@ -72,18 +73,18 @@ class test_utf8_stristr extends UnitTestCase
 		$search = "N\nÂT";
 		$this->assertEqual(utf8_stristr($str, $search), "n\nâtiônàlizætiøn");
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_stristr ();
-	$reporter = getTestReporter();
+	$test = &new test_utf8_stristr ();
+
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

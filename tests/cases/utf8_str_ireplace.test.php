@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @version $Id: utf8_str_ireplace.test.php,v 1.3 2007/08/12 01:20:46 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_str_ireplace.test.php,v 1.3 2007/08/12 01:20:46 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/functions/str_ireplace.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_str_ireplace extends UnitTestCase
 {
-
 	function test_utf8_str_ireplace()
 	{
 		$this->UnitTestCase('test_utf8_str_ireplace()');
@@ -70,7 +71,7 @@ class test_utf8_str_ireplace extends UnitTestCase
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'Iñyërxâyiôxàlizæyiøx';
-		$this->assertEqual(utf8_ireplace(array( 'n', 't' ), array( 'x', 'y' ), $str), $replaced);
+		$this->assertEqual(utf8_ireplace(array('n', 't'), array('x', 'y'), $str), $replaced);
 	}
 
 	function testReplaceArrayUTF8Search()
@@ -78,11 +79,11 @@ class test_utf8_str_ireplace extends UnitTestCase
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'I?tërnâti??nàliz????ti???n';
 		$this->assertEqual(
-				utf8_ireplace(
-						array( 'Ñ', 'ô', 'ø', 'Æ' ),
-						array( '?', '??', '???', '????' ),
-						$str),
-				$replaced);
+			utf8_ireplace(
+				array('Ñ', 'ô', 'ø', 'Æ'),
+				array('?', '??', '???', '????'),
+				$str),
+			$replaced);
 	}
 
 	function testReplaceArrayStringReplace()
@@ -90,11 +91,11 @@ class test_utf8_str_ireplace extends UnitTestCase
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'I?tërnâti?nàliz?ti?n';
 		$this->assertEqual(
-				utf8_ireplace(
-						array( 'Ñ', 'ô', 'ø', 'Æ' ),
-						'?',
-						$str),
-				$replaced);
+			utf8_ireplace(
+				array('Ñ', 'ô', 'ø', 'Æ'),
+				'?',
+				$str),
+			$replaced);
 	}
 
 	function testReplaceArraySingleArrayReplace()
@@ -102,11 +103,11 @@ class test_utf8_str_ireplace extends UnitTestCase
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'I?tërnâtinàliztin';
 		$this->assertEqual(
-				utf8_ireplace(
-						array( 'Ñ', 'ô', 'ø', 'Æ' ),
-						array( '?' ),
-						$str),
-				$replaced);
+			utf8_ireplace(
+				array('Ñ', 'ô', 'ø', 'Æ'),
+				array('?'),
+				$str),
+			$replaced);
 	}
 
 	function testReplaceLinefeed()
@@ -122,18 +123,18 @@ class test_utf8_str_ireplace extends UnitTestCase
 		$replaced = "Iñtërnâtiônàlisetiøn";
 		$this->assertEqual(utf8_ireplace("lI\nzÆ", 'lise', $str), $replaced);
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_str_ireplace();
-	$reporter = getTestReporter();
+	$test = & new test_utf8_str_ireplace();
+
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

@@ -1,25 +1,26 @@
 <?php
+
 /**
- * @version $Id: utf8_strspn.test.php,v 1.2 2006/02/25 14:52:18 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_strspn.test.php,v 1.2 2006/02/25 14:52:18 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/functions/strspn.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_strspn extends UnitTestCase
 {
-
-	function test_utf8_strspn()
+	function test_utf8_strspn ()
 	{
 		$this->UnitTestCase('test_utf8_strspn()');
 	}
@@ -59,19 +60,18 @@ class test_utf8_strspn extends UnitTestCase
 		$str = "iñtërnât\niônàlizætiøn";
 		$this->assertEqual(utf8_strspn($str, "âëiônñrt\n"), 12);
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_strspn();
+	$test = &new test_utf8_strspn();
 
-	$reporter = getTestReporter();
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

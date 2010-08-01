@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @version $Id: utf8_substr.test.php,v 1.5 2006/09/30 22:51:00 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_substr.test.php,v 1.5 2006/09/30 22:51:00 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_substr extends UnitTestCase
 {
-
 	function test_utf8_substr()
 	{
 		$this->UnitTestCase('utf8_substr()');
@@ -62,7 +63,7 @@ class test_utf8_substr extends UnitTestCase
 	function testLengthBeyondString()
 	{
 		$str = 'Iñt';
-		$this->assertEqual(utf8_substr($str, 1, 5), 'ñt');
+		$this->assertEqual(utf8_substr($str, 1, 5),'ñt');
 	}
 
 	function testCompareLengthBeyondString()
@@ -100,19 +101,18 @@ class test_utf8_substr extends UnitTestCase
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$this->assertEqual(utf8_substr($str, 0, 15536), 'Iñtërnâtiônàlizætiøn');
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_substr();
+	$test = & new test_utf8_substr();
 
-	$reporter = getTestReporter();
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

@@ -1,25 +1,26 @@
 <?php
+
 /**
- * @version $Id: utf8_str_pad.test.php,v 1.1 2006/09/03 09:25:13 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_str_pad.test.php,v 1.1 2006/09/03 09:25:13 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/functions/str_pad.php';
 
 /**
- * @author Oliver Saunders <oliver (a) osinternetservices.com>
- * @package utf8
- * @subpackage Tests
- */
+* @author Oliver Saunders <oliver (a) osinternetservices.com>
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_str_pad extends UnitTestCase
 {
-
 	public function test()
 	{
 		$toPad = '<IñtërnëT>'; // 10 characters
@@ -37,18 +38,18 @@ class test_utf8_str_pad extends UnitTestCase
 		$this->assertEqual(utf8_str_pad($toPad, 20, $padding, STR_PAD_LEFT), 'ø__ø__ø__ø'.$toPad);
 		$this->assertEqual(utf8_str_pad($toPad, 20, $padding, STR_PAD_BOTH), 'ø__ø_'.$toPad.'ø__ø_');
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new test_utf8_str_pad();
-	$reporter = getTestReporter();
+	$test = &new test_utf8_str_pad();
+
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }

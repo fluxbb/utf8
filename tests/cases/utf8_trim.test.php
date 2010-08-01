@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @version $Id: utf8_trim.test.php,v 1.2 2006/02/25 14:52:18 harryf Exp $
- * @package utf8
- * @subpackage Tests
- */
+* @version $Id: utf8_trim.test.php,v 1.2 2006/02/25 14:52:18 harryf Exp $
+* @package utf8
+* @subpackage Tests
+*/
+
 /**
- * Includes
- * @package utf8
- * @subpackage Tests
- */
+* Includes
+* @package utf8
+* @subpackage Tests
+*/
 require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/functions/trim.php';
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_ltrim extends UnitTestCase
 {
-
 	function test_utf8_ltrim()
 	{
 		$this->UnitTestCase('test_utf8_ltrim()');
@@ -72,16 +73,14 @@ class test_utf8_ltrim extends UnitTestCase
 		$trimmed = "tërnâtiônàlizætiøn";
 		$this->assertEqual(utf8_ltrim($str, "ñ\n"), $trimmed);
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_rtrim extends UnitTestCase
 {
-
 	function test_utf8_rtrim()
 	{
 		$this->UnitTestCase('test_utf8_rtrim()');
@@ -121,16 +120,14 @@ class test_utf8_rtrim extends UnitTestCase
 		$trimmed = "Iñtërnâtiônàlizæti";
 		$this->assertEqual(utf8_rtrim($str, "ø\n"), $trimmed);
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
+* @package utf8
+* @subpackage Tests
+*/
 class test_utf8_trim extends UnitTestCase
 {
-
 	function test_utf8_trim()
 	{
 		$this->UnitTestCase('test_utf8_trim()');
@@ -156,22 +153,21 @@ class test_utf8_trim extends UnitTestCase
 		$trimmed = '';
 		$this->assertEqual(utf8_trim($str), $trimmed);
 	}
-
 }
 
 /**
- * @package utf8
- * @subpackage Tests
- */
-if( !defined('TEST_RUNNING') )
+* @package utf8
+* @subpackage Tests
+*/
+if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = new GroupTest('utf8_trim tests');
+	$test = & new GroupTest('utf8_trim tests');
 	$test->addTestCase(new test_utf8_ltrim());
 	$test->addTestCase(new test_utf8_rtrim());
 	$test->addTestCase(new test_utf8_trim());
 
-	$reporter = getTestReporter();
+	$reporter = & getTestReporter();
 	$test->run($reporter);
 }
