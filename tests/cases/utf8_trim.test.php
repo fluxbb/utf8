@@ -163,11 +163,11 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = & new GroupTest('utf8_trim tests');
+	$test = new GroupTest('utf8_trim tests');
 	$test->addTestCase(new test_utf8_ltrim());
 	$test->addTestCase(new test_utf8_rtrim());
 	$test->addTestCase(new test_utf8_trim());
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

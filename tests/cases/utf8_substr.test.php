@@ -111,8 +111,8 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = & new test_utf8_substr();
+	$test = new test_utf8_substr();
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

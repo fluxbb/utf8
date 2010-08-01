@@ -48,8 +48,8 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = &new test_utf8_str_pad();
+	$test = new test_utf8_str_pad();
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

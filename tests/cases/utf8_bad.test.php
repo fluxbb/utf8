@@ -585,13 +585,13 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = &new GroupTest('utf8_bad');
+	$test = new GroupTest('utf8_bad');
 	$test->addTestCase(new test_utf8_bad_find());
 	$test->addTestCase(new test_utf8_bad_findall());
 	$test->addTestCase(new test_utf8_bad_strip());
 	$test->addTestCase(new test_utf8_bad_replace());
 	$test->addTestCase(new test_utf8_bad_identify());
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

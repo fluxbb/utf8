@@ -8,7 +8,9 @@
 */
 
 if (! defined('ST_FAILDETAIL_SEPARATOR'))
+{
 	define('ST_FAILDETAIL_SEPARATOR', '->');
+}
 
 if (! defined('ST_FAILS_RETURN_CODE'))
 	define('ST_FAILS_RETURN_CODE', 1);

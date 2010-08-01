@@ -166,13 +166,13 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = &new GroupTest('utf8_ascii');
+	$test = new GroupTest('utf8_ascii');
 	$test->addTestCase(new test_utf8_is_ascii());
 	$test->addTestCase(new test_utf8_strip_non_ascii());
 	$test->addTestCase(new test_utf8_strip_non_ascii_ctrl());
 	$test->addTestCase(new test_utf8_strip_ascii_ctrl());
 	$test->addTestCase(new test_utf8_accents_to_ascii());
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

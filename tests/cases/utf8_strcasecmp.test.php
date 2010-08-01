@@ -84,8 +84,8 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = &new test_utf8_strcasecmp();
+	$test = new test_utf8_strcasecmp();
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

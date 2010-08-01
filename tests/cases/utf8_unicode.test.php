@@ -111,10 +111,10 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = &new GroupTest('utf8_ascii');
+	$test = new GroupTest('utf8_ascii');
 	$test->addTestCase(new test_utf8_to_unicode());
 	$test->addTestCase(new test_utf8_from_unicode());
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }
