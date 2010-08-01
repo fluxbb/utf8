@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL);
+
 if (!defined('UTF8DATA'))
 {
 	define('UTF8DATA', dirname(__FILE__).'/data');
@@ -9,13 +11,7 @@ if (!defined('SIMPLE_TEST'))
 {
 	// Should point at SimpleTest (absolute path required with trailing slash)
 	// or to your include path
-	define('SIMPLE_TEST', '/opt/lampp/htdocs/simpletest/');
-}
-
-// Load SimpleTest and main JPSpan
-if (!file_exists(SIMPLE_TEST.'unit_tester.php'))
-{
-	trigger_error('Unable to load SimpleTest: configure SIMPLE_TEST in config.php');
+	define('SIMPLE_TEST', 'simpletest/');
 }
 
 require_once SIMPLE_TEST.'unit_tester.php';
@@ -46,4 +42,4 @@ elseif ($_GET['engine'] == 'mbstring' || $_GET['engine'] == 'native')
 	define('PHP_UTF8_MODE', $_GET['engine']);
 }
 
-require_once '../php-utf8.php';
+require_once dirname(__FILE__).'/../php-utf8.php';
