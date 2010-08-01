@@ -1,5 +1,8 @@
 <?php
+
 error_reporting(E_ALL);
+// error_reporting(E_ALL | E_STRICT);
+
 if (!defined('UTF8DATA'))
 {
 	define('UTF8DATA', dirname(__FILE__).'/data');
@@ -10,6 +13,11 @@ if (!defined('SIMPLE_TEST'))
 	// Should point at SimpleTest (absolute path required with trailing slash)
 	// or to your include path
 	define('SIMPLE_TEST', 'simpletest/');
+}
+
+if(!defined('UTF8'))
+{
+	define('UTF8', dirname(__FILE__).'/..');
 }
 
 require_once SIMPLE_TEST.'unit_tester.php';
@@ -24,7 +32,7 @@ function &getTestReporter()
 	else
 	{
 		require dirname(__FILE__).'/cli_reporter.php';
-		$R = & new CLIReporter();
+		$R = new CLIReporter();
 	}
 
 	return $R;

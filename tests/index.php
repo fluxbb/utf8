@@ -29,16 +29,21 @@
 
 	<ul>
 		<?php
-		foreach( glob(dirname(__FILE__).'/cases/*.test.php') as $filename )
+
+		$dir = new DirectoryIterator(dirname(__FILE__).'/cases/');
+
+		foreach($dir as $fi)
 		{
-			$filename = htmlspecialchars(end(explode('/', $filename)));
-		?>
+			if (!$fi->isFile())
+				continue;
+
+			$filename = $fi->getFilename(); ?>
 			<li>
-				<a class="run-test" href="./cases/<?php echo $filename?>"><?php echo $filename?></a>
-				<a class="choose-engine" href="./cases/<?php echo $filename?>?engine=mbstring">[mbstring]</a>
-				<a class="choose-engine" href="./cases/<?php echo $filename?>?engine=native">[native]</a>
+				<a class="run-test" href="./cases/<?php echo $filename ?>"><?php echo $filename ?></a>
+				<a class="choose-engine" href="./cases/<?php echo $filename ?>?engine=mbstring">[mbstring]</a>
+				<a class="choose-engine" href="./cases/<?php echo $filename ?>?engine=native">[native]</a>
 			</li>
-		<?php
+			<?php
 		}
 		?>
 	</ul>
