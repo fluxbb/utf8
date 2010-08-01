@@ -133,7 +133,7 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = & new test_utf8_str_ireplace();
+	$test = new test_utf8_str_ireplace();
 
 	$reporter = getTestReporter();
 	$test->run($reporter);
