@@ -113,6 +113,6 @@ if (!defined('TEST_RUNNING'))
 
 	$test = & new test_utf8_substr();
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

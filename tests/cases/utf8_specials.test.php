@@ -84,10 +84,10 @@ if (!defined('TEST_RUNNING'))
 {
 	define('TEST_RUNNING', true);
 
-	$test = &new GroupTest('utf8_ascii');
+	$test = new GroupTest('utf8_ascii');
 	$test->addTestCase(new test_utf8_strip_specials());
 	$test->addTestCase(new test_utf8_is_word_chars());
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }

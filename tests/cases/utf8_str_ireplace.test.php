@@ -135,6 +135,6 @@ if (!defined('TEST_RUNNING'))
 
 	$test = & new test_utf8_str_ireplace();
 
-	$reporter = & getTestReporter();
+	$reporter = getTestReporter();
 	$test->run($reporter);
 }
