@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tools for validing a UTF-8 string is well formed.
  * The Original Code is Mozilla Communicator client code.
@@ -25,10 +26,10 @@
  */
 function utf8_is_valid($str)
 {
-	$mState = 0;	 // Cached expected number of octets after the current octet
+	$mState = 0;  // Cached expected number of octets after the current octet
 	// until the beginning of the next UTF8 character sequence
-	$mUcs4 = 0;	 // Cached Unicode character
-	$mBytes = 1;	 // Cached expected number of octets in the current sequence
+	$mUcs4 = 0;  // Cached Unicode character
+	$mBytes = 1;  // Cached expected number of octets in the current sequence
 
 	$len = strlen($str);
 
@@ -165,7 +166,7 @@ function utf8_is_valid($str)
  */
 function utf8_compliant($str)
 {
-	if( strlen($str) == 0 )
+	if( empty($str) )
 	{
 		return TRUE;
 	}

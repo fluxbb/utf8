@@ -19,47 +19,18 @@
 
 /**
  * Locates the first bad byte in a UTF-8 string returning it's byte index in the string.
+ * Optionally it can locate all bad bytes in a UTF-8 string and returns a list of their
+ * byte index in the string.
  *
  * PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms
  * Note: modified to include full ASCII range including control chars
- *
- * @see http://www.w3.org/International/questions/qa-forms-utf-8
- * @param string
- * @return mixed integer byte index or FALSE if no bad found
- */
-function utf8_bad_find($str)
-{
-	$pos = 0;
-	$badList = array( );
-
-	while( preg_match('/'.PHP_UTF8_BAD_UTF_PATTERN.'/S', $str, $matches) )
-	{
-		$bytes = strlen($matches[0]);
-
-		if( isset($matches[2]) )
-		{
-			return $pos;
-		}
-
-		$pos += $bytes;
-		$str = substr($str, $bytes);
-	}
-
-	return false;
-}
-
-/**
- * Locates all bad bytes in a UTF-8 string and returns a list of their byte
- * index in the string.
- *
- * PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms
- * Note: modified to include full ASCII range including control chars
- *
+ * 
  * @see http://www.w3.org/International/questions/qa-forms-utf-8
  * @param string $str
- * @return mixed array of integers or FALSE if no bad found
+ * @param boolean $first_only
+ * @return mixed integer byte index or FALSE if no bad found
  */
-function utf8_bad_findall($str)
+function utf8_bad_find($str, $first_only = TRUE)
 {
 	$pos = 0;
 	$badList = array( );
@@ -70,6 +41,10 @@ function utf8_bad_findall($str)
 
 		if( isset($matches[2]) )
 		{
+			if($first_only)
+			{
+				return $pos;
+			}
 			$badList[] = $pos;
 		}
 
@@ -87,6 +62,7 @@ function utf8_bad_findall($str)
 
 /**
  * Strips out any bad bytes from a UTF-8 string and returns the rest.
+ * Can optionally replace bad bytes with an alternative character.
  *
  * PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms.
  * Note: modified to include full ASCII range including control chars
@@ -95,7 +71,7 @@ function utf8_bad_findall($str)
  * @param string $str
  * @return string
  */
-function utf8_bad_strip($str)
+function utf8_bad_clean($str, $replace = FALSE)
 {
 	ob_start();
 
@@ -105,38 +81,7 @@ function utf8_bad_strip($str)
 		{
 			echo $matches[0];
 		}
-
-		$str = substr($str, strlen($matches[0]));
-	}
-
-	$result = ob_get_contents();
-	ob_end_clean();
-
-	return $result;
-}
-
-/**
- * Replace bad bytes with an alternative character - ASCII character recommended is replacement char.
- * 
- * PCRE Pattern to locate bad bytes in a UTF-8 string comes from W3 FAQ: Multilingual Forms
- * Note: modified to include full ASCII range including control chars
- *
- * @see http://www.w3.org/International/questions/qa-forms-utf-8
- * @param string $str string to search
- * @param string $replace string to replace bad bytes with (defaults to '?') - use ASCII
- * @return string
- */
-function utf8_bad_replace($str, $replace='?')
-{
-	ob_start();
-
-	while( preg_match('/'.PHP_UTF8_BAD_UTF_PATTERN.'/S', $str, $matches) )
-	{
-		if( !isset($matches[2]) )
-		{
-			echo $matches[0];
-		}
-		else
+		elseif (($replace !== FALSE) &&( is_string($replace)))
 		{
 			echo $replace;
 		}
@@ -144,11 +89,9 @@ function utf8_bad_replace($str, $replace='?')
 		$str = substr($str, strlen($matches[0]));
 	}
 
-	$result = ob_get_contents();
-	ob_end_clean();
-
-	return $result;
+	return ob_get_clean();
 }
+
 
 /**
  * Return code from utf8_bad_identify() when a five octet sequence is detected.

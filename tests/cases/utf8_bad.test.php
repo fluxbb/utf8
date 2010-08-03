@@ -121,335 +121,311 @@ class test_utf8_bad_find extends UnitTestCase
 		$str = "Iñtërnâtiônàlizætiøn\xfc\xa1\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
 		$this->assertEqual(utf8_bad_find($str), 27);
 	}
-}
 
-/**
-* @package utf8
-* @subpackage Tests
-*/
-class test_utf8_bad_findall extends UnitTestCase
-{
-	function test_utf8_bad_findall()
-	{
-		$this->UnitTestCase('test_utf8_bad_findall()');
-	}
-
-	function testValidUtf8()
+	function testValidUtf8All()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
-		$this->assertFalse(utf8_bad_findall($str));
+		$this->assertFalse(utf8_bad_find($str, FALSE));
 	}
 
-	function testValidUtf8Ascii()
+	function testValidUtf8AsciiAll()
 	{
 		$str = 'testing';
-		$this->assertFalse(utf8_bad_findall($str));
+		$this->assertFalse(utf8_bad_find($str, FALSE));
 	}
 
-	function testInvalidUtf8()
+	function testInvalidUtf8All()
 	{
 		$str = "Iñtërnâtiôn\xe9àlizætiøn";
 		$test = array(15);
-		$this->assertEqual(utf8_bad_findall($str), $test);
+		$this->assertEqual(utf8_bad_find($str, FALSE), $test);
 	}
 
-	function testInvalidUtf8Ascii()
+	function testInvalidUtf8AsciiAll()
 	{
 		$str = "this is an invalid char '\xe9' here";
 		$test = array(25);
-		$this->assertEqual(utf8_bad_findall($str), $test);
+		$this->assertEqual(utf8_bad_find($str, FALSE), $test);
 	}
 
-	function testInvalidUtf8Multiple()
+	function testInvalidUtf8MultipleAll()
 	{
 		$str = "\xe9Iñtërnâtiôn\xe9àlizætiøn\xe9";
 		$test = array(0, 16, 29);
-		$this->assertEqual(utf8_bad_findall($str), $test);
+		$this->assertEqual(utf8_bad_find($str, FALSE), $test);
 	}
 
-	function testValidTwoOctetId()
+	function testValidTwoOctetIdAll()
 	{
 		$str = "abc\xc3\xb1";
-		$this->assertFalse(utf8_bad_findall($str));
+		$this->assertFalse(utf8_bad_find($str, FALSE));
 	}
 
-	function testInvalidTwoOctetSequence()
+	function testInvalidTwoOctetSequenceAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn \xc3\x28 Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_findall($str), array(28));
+		$this->assertEqual(utf8_bad_find($str, FALSE), array(28));
 	}
 
-	function testInvalidIdBetweenTwoAndThree()
+	function testInvalidIdBetweenTwoAndThreeAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xa0\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_findall($str), array(27, 28));
+		$this->assertEqual(utf8_bad_find($str, FALSE), array(27, 28));
 	}
 
-	function testValidThreeOctetId()
+	function testValidThreeOctetIdAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x82\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertFalse(utf8_bad_findall($str));
+		$this->assertFalse(utf8_bad_find($str, FALSE));
 	}
 
-	function testInvalidThreeOctetSequenceSecond()
+	function testInvalidThreeOctetSequenceSecondAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x28\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_findall($str), array(27, 29));
+		$this->assertEqual(utf8_bad_find($str, FALSE), array(27, 29));
 	}
 
-	function testInvalidThreeOctetSequenceThird()
+	function testInvalidThreeOctetSequenceThirdAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x82\x28Iñtërnâtiônàlizætiøn";
 		$this->assertEqual(utf8_bad_find($str), 27);
 	}
 
-	function testValidFourOctetId()
+	function testValidFourOctetIdAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf0\x90\x8c\xbcIñtërnâtiônàlizætiøn";
-		$this->assertFalse(utf8_bad_findall($str));
+		$this->assertFalse(utf8_bad_find($str, FALSE));
 	}
 
-	function testInvalidFourOctetSequence()
+	function testInvalidFourOctetSequenceAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf0\x28\x8c\xbcIñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_findall($str), array(27, 29, 30));
+		$this->assertEqual(utf8_bad_find($str, FALSE), array(27, 29, 30));
 	}
 
-	function testInvalidFiveOctetSequence()
+	function testInvalidFiveOctetSequenceAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf8\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_findall($str), range(27, 31));
+		$this->assertEqual(utf8_bad_find($str, FALSE), range(27, 31));
 	}
 
-	function testInvalidSixOctetSequence()
+	function testInvalidSixOctetSequenceAll()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xfc\xa1\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_findall($str), range(27, 32));
+		$this->assertEqual(utf8_bad_find($str, FALSE), range(27, 32));
 	}
 }
+
 
 /**
 * @package utf8
 * @subpackage Tests
 */
-class test_utf8_bad_strip extends UnitTestCase
+class test_utf8_bad_clean extends UnitTestCase
 {
-	function test_utf8_bad_strip()
+	function test_utf8_bad_clean()
 	{
-		$this->UnitTestCase('test_utf8_bad_strip()');
+		$this->UnitTestCase('test_utf8_bad_clean()');
 	}
 
 	function testValidUtf8()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
-		$this->assertEqual(utf8_bad_strip($str), $str);
+		$this->assertEqual(utf8_bad_clean($str), $str);
 	}
 
 	function testValidUtf8Ascii()
 	{
 		$str = 'testing';
-		$this->assertEqual(utf8_bad_strip($str), $str);
+		$this->assertEqual(utf8_bad_clean($str), $str);
 	}
 
 	function testInvalidUtf8()
 	{
 		$str = "Iñtërnâtiôn\xe9àlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), 'Iñtërnâtiônàlizætiøn');
+		$this->assertEqual(utf8_bad_clean($str), 'Iñtërnâtiônàlizætiøn');
 	}
 
 	function testInvalidUtf8Ascii()
 	{
 		$str = "this is an invalid char '\xe9' here";
-		$this->assertEqual(utf8_bad_strip($str), "this is an invalid char '' here");
+		$this->assertEqual(utf8_bad_clean($str), "this is an invalid char '' here");
 	}
 
 	function testInvalidUtf8Multiple()
 	{
 		$str = "\xe9Iñtërnâtiôn\xe9àlizætiøn\xe9";
-		$this->assertEqual(utf8_bad_strip($str), 'Iñtërnâtiônàlizætiøn');
+		$this->assertEqual(utf8_bad_clean($str), 'Iñtërnâtiônàlizætiøn');
 	}
 
 	function testValidTwoOctetId()
 	{
 		$str = "abc\xc3\xb1";
-		$this->assertEqual(utf8_bad_strip($str), $str);
+		$this->assertEqual(utf8_bad_clean($str), $str);
 	}
 
 	function testInvalidTwoOctetSequence()
 	{
 		$str = "Iñtërnâtiônàlizætiøn \xc3\x28 Iñtërnâtiônàlizætiøn";
 		$stripped = "Iñtërnâtiônàlizætiøn \x28 Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
 	function testInvalidIdBetweenTwoAndThree()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xa0\xa1Iñtërnâtiônàlizætiøn";
 		$stripped = "IñtërnâtiônàlizætiønIñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
 	function testValidThreeOctetId()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x82\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $str);
+		$this->assertEqual(utf8_bad_clean($str), $str);
 	}
 
 	function testInvalidThreeOctetSequenceSecond()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x28\xa1Iñtërnâtiônàlizætiøn";
 		$stripped = "Iñtërnâtiônàlizætiøn(Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
 	function testInvalidThreeOctetSequenceThird()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x82\x28Iñtërnâtiônàlizætiøn";
 		$stripped = "Iñtërnâtiônàlizætiøn(Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
 	function testValidFourOctetId()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf0\x90\x8c\xbcIñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $str);
+		$this->assertEqual(utf8_bad_clean($str), $str);
 	}
 
 	function testInvalidFourOctetSequence()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf0\x28\x8c\xbcIñtërnâtiônàlizætiøn";
 		$stripped = "Iñtërnâtiônàlizætiøn(Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
 	function testInvalidFiveOctetSequence()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf8\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
 		$stripped = "IñtërnâtiônàlizætiønIñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
 	function testInvalidSixOctetSequence()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xfc\xa1\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
 		$stripped = "IñtërnâtiônàlizætiønIñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_strip($str), $stripped);
+		$this->assertEqual(utf8_bad_clean($str), $stripped);
 	}
 
-}
-
-/**
-* @package utf8
-* @subpackage Tests
-*/
-class test_utf8_bad_replace extends UnitTestCase
-{
-	function test_utf8_bad_replace()
-	{
-		$this->UnitTestCase('test_utf8_bad_replace()');
-	}
-
-	function testValidUtf8()
+	function testValidUtf8Replace()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
-		$this->assertEqual(utf8_bad_replace($str), $str);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $str);
 	}
 
-	function testValidUtf8Ascii()
+	function testValidUtf8AsciiReplace()
 	{
 		$str = 'testing';
-		$this->assertEqual(utf8_bad_replace($str), $str);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $str);
 	}
 
-	function testInvalidUtf8()
+	function testInvalidUtf8Replace()
 	{
 		$str = "Iñtërnâtiôn\xe9àlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), 'Iñtërnâtiôn?àlizætiøn');
+		$this->assertEqual(utf8_bad_clean($str, '?'), 'Iñtërnâtiôn?àlizætiøn');
 	}
 
-	function testInvalidUtf8WithX()
+	function testInvalidUtf8WithXReplace()
 	{
 		$str = "Iñtërnâtiôn\xe9àlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str, 'X'), 'IñtërnâtiônXàlizætiøn');
+		$this->assertEqual(utf8_bad_clean($str, 'X'), 'IñtërnâtiônXàlizætiøn');
 	}
 
-	function testInvalidUtf8Ascii()
+	function testInvalidUtf8AsciiReplace()
 	{
 		$str = "this is an invalid char '\xe9' here";
-		$this->assertEqual(utf8_bad_replace($str), "this is an invalid char '?' here");
+		$this->assertEqual(utf8_bad_clean($str, '?'), "this is an invalid char '?' here");
 	}
 
-	function testInvalidUtf8Multiple()
+	function testInvalidUtf8MultipleReplace()
 	{
 		$str = "\xe9Iñtërnâtiôn\xe9àlizætiøn\xe9";
-		$this->assertEqual(utf8_bad_replace($str), '?Iñtërnâtiôn?àlizætiøn?');
+		$this->assertEqual(utf8_bad_clean($str, '?'), '?Iñtërnâtiôn?àlizætiøn?');
 	}
 
-	function testValidTwoOctetId()
+	function testValidTwoOctetIdReplace()
 	{
 		$str = "abc\xc3\xb1";
-		$this->assertEqual(utf8_bad_replace($str), $str);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $str);
 	}
 
-	function testInvalidTwoOctetSequence()
+	function testInvalidTwoOctetSequenceReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn \xc3\x28 Iñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn ?( Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 
-	function testInvalidIdBetweenTwoAndThree()
+	function testInvalidIdBetweenTwoAndThreeReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xa0\xa1Iñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn??Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 
-	function testValidThreeOctetId()
+	function testValidThreeOctetIdReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x82\xa1Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $str);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $str);
 	}
 
-	function testInvalidThreeOctetSequenceSecond()
+	function testInvalidThreeOctetSequenceSecondReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x28\xa1Iñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn?(?Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 
-	function testInvalidThreeOctetSequenceThird()
+	function testInvalidThreeOctetSequenceThirdReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xe2\x82\x28Iñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn??(Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 
-	function testValidFourOctetId()
+	function testValidFourOctetIdReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf0\x90\x8c\xbcIñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $str);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $str);
 	}
 
-	function testInvalidFourOctetSequence()
+	function testInvalidFourOctetSequenceReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf0\x28\x8c\xbcIñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn?(??Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 
-	function testInvalidFiveOctetSequence()
+	function testInvalidFiveOctetSequenceReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xf8\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn?????Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 
-	function testInvalidSixOctetSequence()
+	function testInvalidSixOctetSequenceReplace()
 	{
 		$str = "Iñtërnâtiônàlizætiøn\xfc\xa1\xa1\xa1\xa1\xa1Iñtërnâtiônàlizætiøn";
 		$replaced = "Iñtërnâtiônàlizætiøn??????Iñtërnâtiônàlizætiøn";
-		$this->assertEqual(utf8_bad_replace($str), $replaced);
+		$this->assertEqual(utf8_bad_clean($str, '?'), $replaced);
 	}
 }
 
@@ -587,9 +563,7 @@ if (!defined('TEST_RUNNING'))
 
 	$test = new GroupTest('utf8_bad');
 	$test->addTestCase(new test_utf8_bad_find());
-	$test->addTestCase(new test_utf8_bad_findall());
-	$test->addTestCase(new test_utf8_bad_strip());
-	$test->addTestCase(new test_utf8_bad_replace());
+	$test->addTestCase(new test_utf8_bad_clean());
 	$test->addTestCase(new test_utf8_bad_identify());
 
 	$reporter = getTestReporter();

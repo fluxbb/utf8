@@ -22,6 +22,7 @@
 			</div>
 	<div class="info-box-body">	
 		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The following functions assume mbstring internal encoding is set to UTF-8.</p>
 		
 			</div>
 </div>
@@ -38,13 +39,13 @@
 					</div>
 		<div class="info-box-body">	
 			<a name="_UTF8_/utils/patterns_php"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<span class="include-title">
 			<span class="include-type">require_once</span>
 			(<span class="include-name">UTF8.'/utils/patterns.php'</span>)
-			(line <span class="line-number">19</span>)
+			(line <span class="line-number">21</span>)
 		</span>
 	</div>
 
@@ -52,13 +53,13 @@
 	
 </div>
 <a name="_UTF8_/utils/bad_php"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<span class="include-title">
 			<span class="include-type">require_once</span>
 			(<span class="include-name">UTF8.'/utils/bad.php'</span>)
-			(line <span class="line-number">20</span>)
+			(line <span class="line-number">22</span>)
 		</span>
 	</div>
 
@@ -79,12 +80,12 @@
 					</div>
 		<div class="info-box-body">	
 			<a name="defineUTF8_CORE"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<span class="const-title">
-			<span class="const-name">UTF8_CORE</span> = true
-			(line <span class="line-number">12</span>)
+			<span class="const-name">UTF8_CORE</span> = TRUE
+			(line <span class="line-number">14</span>)
 		</span>
 	</div>
 	
@@ -108,15 +109,15 @@
 		</div>
 		<div class="info-box-body">	
 			<a name="functionmbstring_strlen" id="functionmbstring_strlen"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
-		<span class="method-title">mbstring_strlen</span> (line <span class="line-number">31</span>)
+		<span class="method-title">mbstring_strlen</span> (line <span class="line-number">32</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Wrapper round mb_strlen.</p>
-<p class="description"><p>Assumes you have mb_internal_encoding to UTF-8 already.  This function does not count bad bytes in the string - these are simply ignored.</p></p>
+<p class="description"><p>This function does not count bad bytes in the string - these are simply ignored.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> number of UTF-8 characters in string</li>
 				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strlen">utf8_strlen()</a></li>
@@ -139,7 +140,7 @@
 	
 </div>
 <a name="functionmbstring_strpos" id="functionmbstring_strpos"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<span class="method-title">mbstring_strpos</span> (line <span class="line-number">47</span>)
@@ -147,7 +148,7 @@
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Wrapper around mb_strpos.</p>
-<p class="description"><p>Find position of first occurrence of a string.  Assumes mbstring internal encoding is set to UTF-8.</p></p>
+<p class="description"><p>Find position of first occurrence of a string.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> integer position or FALSE on failure</li>
 				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strpos">utf8_strpos()</a></li>
@@ -158,7 +159,7 @@
 		<span class="method-name">
 			mbstring_strpos
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$search</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">false</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$search</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">FALSE</span>])
 			</div>
 
 			<ul class="parameters">
@@ -176,15 +177,15 @@
 	
 </div>
 <a name="functionmbstring_strrpos" id="functionmbstring_strrpos"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
-		<span class="method-title">mbstring_strrpos</span> (line <span class="line-number">71</span>)
+		<span class="method-title">mbstring_strrpos</span> (line <span class="line-number">67</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Wrapper around mb_strrpos.</p>
-<p class="description"><p>Find position of last occurrence of a char in a string.  Assumes mbstring internal encoding is set to UTF-8</p></p>
+<p class="description"><p>Find position of last occurrence of a char in a string.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> integer position or FALSE on failure</li>
 				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strrpos">utf8_strrpos()</a></li>
@@ -195,7 +196,7 @@
 		<span class="method-name">
 			mbstring_strrpos
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$search</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">false</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$search</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">FALSE</span>])
 			</div>
 
 			<ul class="parameters">
@@ -213,15 +214,15 @@
 	
 </div>
 <a name="functionmbstring_strtolower" id="functionmbstring_strtolower"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
-		<span class="method-title">mbstring_strtolower</span> (line <span class="line-number">139</span>)
+		<span class="method-title">mbstring_strtolower</span> (line <span class="line-number">127</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Wrapper around mb_strtolower.</p>
-<p class="description"><p>Make a string lowercase.</p><p>The concept of a characters &quot;case&quot; only exists is some alphabets such as  Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in  the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings.</p><p>Assumes mbstring internal encoding is set to UTF-8.</p></p>
+<p class="description"><p>Make a string lowercase.</p><p>The concept of a characters &quot;case&quot; only exists is some alphabets such as  Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in  the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> either string in lowercase or FALSE is UTF-8 invalid</li>
 				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strtolower">utf8_strtolower()</a></li>
@@ -244,15 +245,15 @@
 	
 </div>
 <a name="functionmbstring_strtoupper" id="functionmbstring_strtoupper"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
-		<span class="method-title">mbstring_strtoupper</span> (line <span class="line-number">158</span>)
+		<span class="method-title">mbstring_strtoupper</span> (line <span class="line-number">144</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Wrapper around mb_strtoupper.</p>
-<p class="description"><p>Make a string uppercase.</p><p>The concept of a characters &quot;case&quot; only exists is some alphabets such as  Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in  the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings</p><p>Assumes mbstring internal encoding is set to UTF-8.</p></p>
+<p class="description"><p>Make a string uppercase.</p><p>The concept of a characters &quot;case&quot; only exists is some alphabets such as  Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in  the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> either string in lowercase or FALSE is UTF-8 invalid</li>
 				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strtoupper">utf8_strtoupper()</a></li>
@@ -275,15 +276,15 @@
 	
 </div>
 <a name="functionmbstring_substr" id="functionmbstring_substr"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
-		<span class="method-title">mbstring_substr</span> (line <span class="line-number">116</span>)
+		<span class="method-title">mbstring_substr</span> (line <span class="line-number">106</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Wrapper around mb_substr.</p>
-<p class="description"><p>Return part of a string given character offset (and optionally length).  Assumes mbstring internal encoding is set to UTF-8.</p></p>
+<p class="description"><p>Return part of a string given character offset (and optionally length).</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> string or FALSE if failure</li>
 				<li><span class="field">usedby:</span> <a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_substr">utf8_substr()</a></li>
@@ -294,7 +295,7 @@
 		<span class="method-name">
 			mbstring_substr
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$length</span> = <span class="var-default">false</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$offset</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$length</span> = <span class="var-default">FALSE</span>])
 			</div>
 
 			<ul class="parameters">
@@ -315,7 +316,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 31 Jul 2010 22:06:58 +0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 03 Aug 2010 13:44:16 +0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

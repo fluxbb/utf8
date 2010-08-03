@@ -39,7 +39,7 @@ class test_utf8_strpos extends UnitTestCase
 	function testUtf8Invalid()
 	{
 		$str = "Iñtërnâtiôn\xe9àlizætiøn";
-		$this->assertEqual(utf8_strpos($str, 'æ'), 15);
+		$this->assertEqual(utf8_strpos($str, 'æ'), 16);
 	}
 
 	function testAscii()

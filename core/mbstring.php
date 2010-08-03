@@ -1,5 +1,7 @@
 <?php
 /**
+ * The following functions assume mbstring internal encoding is set to UTF-8.
+ *
  * @package php-utf8
  * @subpackage mbstring
  */
@@ -9,7 +11,7 @@
  */
 if( !defined('UTF8_CORE') )
 {
-	define('UTF8_CORE', true);
+	define('UTF8_CORE', TRUE);
 }
 
 /*
@@ -22,7 +24,6 @@ require_once UTF8.'/utils/bad.php';
 /**
  * Wrapper round mb_strlen.
  *
- * Assumes you have mb_internal_encoding to UTF-8 already.
  * This function does not count bad bytes in the string - these are simply ignored.
  *
  * @param string $str UTF-8 string
@@ -37,19 +38,15 @@ function mbstring_strlen($str)
  * Wrapper around mb_strpos.
  *
  * Find position of first occurrence of a string.
- * Assumes mbstring internal encoding is set to UTF-8.
  *
  * @param string $str haystack
  * @param string $search needle (you should validate this with utf8_is_valid)
  * @param integer offset in characters (from left)
  * @return mixed integer position or FALSE on failure
  */
-function mbstring_strpos($str, $search, $offset = false)
+function mbstring_strpos($str, $search, $offset = FALSE)
 {
-	// Strip unvalid characters
-	$str = utf8_bad_strip($str);
-
-	if( $offset === false )
+	if( $offset === FALSE )
 	{
 		return mb_strpos($str, $search);
 	}
@@ -61,61 +58,54 @@ function mbstring_strpos($str, $search, $offset = false)
  * Wrapper around mb_strrpos.
  *
  * Find position of last occurrence of a char in a string.
- * Assumes mbstring internal encoding is set to UTF-8
  * 
  * @param string $str haystack
  * @param string $search needle (you should validate this with utf8_is_valid)
  * @param integer $offset (optional) offset (from left)
  * @return mixed integer position or FALSE on failure
  */
-function mbstring_strrpos($str, $search, $offset = false)
+function mbstring_strrpos($str, $search, $offset = FALSE)
 {
-	// Strip unvalid characters
-	$str = utf8_bad_strip($str);
-
 	if( !$offset )
 	{
 		// Emulate behaviour of strrpos rather than raising warning
 		if( empty($str) )
 		{
-			return false;
+			return FALSE;
 		}
 
 		return mb_strrpos($str, $search);
 	}
-	else
+
+	if( !is_int($offset) )
 	{
-		if( !is_int($offset) )
-		{
-			trigger_error('utf8_strrpos expects parameter 3 to be long', E_USER_WARNING);
-			return false;
-		}
-
-		$str = mb_substr($str, $offset);
-
-		if( ($pos = mb_strrpos($str, $search)) !== false )
-		{
-			return $pos + $offset;
-		}
-
-		return false;
+		trigger_error('utf8_strrpos expects parameter 3 to be long', E_USER_WARNING);
+		return FALSE;
 	}
+
+	$str = mb_substr($str, $offset);
+
+	if( ($pos = mb_strrpos($str, $search)) !== FALSE )
+	{
+		return $pos + $offset;
+	}
+
+	return FALSE;
 }
 
 /**
  * Wrapper around mb_substr.
  *
  * Return part of a string given character offset (and optionally length).
- * Assumes mbstring internal encoding is set to UTF-8.
  *
  * @param string $str
  * @param integer $offset number of UTF-8 characters offset (from left)
  * @param integer $length (optional) length in UTF-8 characters from offset
  * @return mixed string or FALSE if failure
  */
-function mbstring_substr($str, $offset, $length = false)
+function mbstring_substr($str, $offset, $length = FALSE)
 {
-	if( $length === false )
+	if( $length === FALSE )
 	{
 		return mb_substr($str, $offset);
 	}
@@ -130,8 +120,6 @@ function mbstring_substr($str, $offset, $length = false)
  * The concept of a characters "case" only exists is some alphabets such as
  * Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in
  * the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings.
- *
- * Assumes mbstring internal encoding is set to UTF-8.
  *
  * @param string $str
  * @return mixed either string in lowercase or FALSE is UTF-8 invalid
@@ -149,8 +137,6 @@ function mbstring_strtolower($str)
  * The concept of a characters "case" only exists is some alphabets such as
  * Latin, Greek, Cyrillic, Armenian and archaic Georgian - it does not exist in
  * the Chinese alphabet, for example. See Unicode Standard Annex #21: Case Mappings
- *
- * Assumes mbstring internal encoding is set to UTF-8.
  *
  * @param string
  * @return mixed either string in lowercase or FALSE is UTF-8 invalid

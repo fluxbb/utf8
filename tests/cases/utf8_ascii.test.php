@@ -15,6 +15,7 @@ require_once dirname(__FILE__).'/../config.php';
 require_once UTF8.'/utils/ascii.php';
 
 /**
+* @todo Need to implement more tests.
 * @package utf8
 * @subpackage Tests
 */
@@ -54,7 +55,7 @@ class test_utf8_is_ascii extends UnitTestCase
 * @package utf8
 * @subpackage Tests
 */
-class test_utf8_strip_non_ascii extends UnitTestCase
+class test_utf8_to_ascii extends UnitTestCase
 {
 	function test_utf8_strip_non_ascii()
 	{
@@ -64,63 +65,38 @@ class test_utf8_strip_non_ascii extends UnitTestCase
 	function testUtf8()
 	{
 		$str = 'testiñg';
-		$this->assertEqual(utf8_strip_non_ascii($str), 'testig');
+		$this->assertEqual(utf8_to_ascii($str), 'testig');
 	}
 
 	function testAscii()
 	{
 		$str = 'testing';
-		$this->assertEqual(utf8_strip_non_ascii($str), 'testing');
+		$this->assertEqual(utf8_to_ascii($str), 'testing');
 	}
 
 	function testInvalidChar()
 	{
 		$str = "tes\xe9ting";
-		$this->assertEqual(utf8_strip_non_ascii($str), 'testing');
+		$this->assertEqual(utf8_to_ascii($str), 'testing');
 	}
 
 	function testEmptyStr()
 	{
 		$str = '';
-		$this->assertEqual(utf8_strip_non_ascii($str), '');
-	}
-}
-
-/**
-* @package utf8
-* @subpackage Tests
-*/
-class test_utf8_strip_non_ascii_ctrl extends UnitTestCase
-{
-	function test_utf8_strip_non_ascii_ctrl()
-	{
-		$this->UnitTestCase('test_utf8_strip_non_ascii_ctrl');
+		$this->assertEqual(utf8_to_ascii($str), '');
 	}
 
 	function testNulAndNon7Bit()
 	{
 		$str = "a\x00ñ\x00c";
-		$this->assertEqual(utf8_strip_non_ascii_ctrl($str), 'ac');
-	}
-}
-
-/**
-* @package utf8
-* @subpackage Tests
-*/
-class test_utf8_strip_ascii_ctrl extends UnitTestCase
-{
-	function test_utf8_strip_ascii_ctrl()
-	{
-		$this->UnitTestCase('test_utf8_strip_ascii_ctrl');
+		$this->assertEqual(utf8_to_ascii($str, 'both'), 'ac');
 	}
 
 	function testNul()
 	{
 		$str = "a\x00b\x00c";
-		$this->assertEqual(utf8_strip_ascii_ctrl($str), 'abc');
+		$this->assertEqual(utf8_to_ascii($str, 'ctrl_chars'), 'abc');
 	}
-
 }
 
 /**
@@ -142,19 +118,19 @@ class test_utf8_accents_to_ascii extends UnitTestCase
 	function testLowercase()
 	{
 		$str = "ô";
-		$this->assertEqual(utf8_accents_to_ascii($str, -1), 'o');
+		$this->assertEqual(utf8_accents_to_ascii($str, 'lower'), 'o');
 	}
 
 	function testUppercase()
 	{
 		$str = "Ô";
-		$this->assertEqual(utf8_accents_to_ascii($str, 1), 'O');
+		$this->assertEqual(utf8_accents_to_ascii($str, 'upper'), 'O');
 	}
 
 	function testBoth()
 	{
 		$str = "ôÔ";
-		$this->assertEqual(utf8_accents_to_ascii($str, 0), 'oO');
+		$this->assertEqual(utf8_accents_to_ascii($str, 'both'), 'oO');
 	}
 }
 
@@ -168,9 +144,6 @@ if (!defined('TEST_RUNNING'))
 
 	$test = new GroupTest('utf8_ascii');
 	$test->addTestCase(new test_utf8_is_ascii());
-	$test->addTestCase(new test_utf8_strip_non_ascii());
-	$test->addTestCase(new test_utf8_strip_non_ascii_ctrl());
-	$test->addTestCase(new test_utf8_strip_ascii_ctrl());
 	$test->addTestCase(new test_utf8_accents_to_ascii());
 
 	$reporter = getTestReporter();

@@ -41,7 +41,7 @@
 <div class="evenrow">
 	
 	<div>
-		<span class="method-title">utf8_accents_to_ascii</span> (line <span class="line-number">163</span>)
+		<span class="method-title">utf8_accents_to_ascii</span> (line <span class="line-number">107</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
@@ -57,7 +57,7 @@
 		<span class="method-name">
 			utf8_accents_to_ascii
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$case</span> = <span class="var-default">0</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">2</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">&#039;both&#039;</span>], <span class="var-type">int</span>&nbsp;<span class="var-name">$case</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">2</span>)
 			</div>
 
 			<ul class="parameters">
@@ -70,6 +70,9 @@
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">2</span><span class="var-description">: UTF-8 with accented characters replaced by ASCII chars</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$mode</span>			</li>
 				</ul>
 		
 	
@@ -78,7 +81,7 @@
 <div class="oddrow">
 	
 	<div>
-		<span class="method-title">utf8_is_ascii</span> (line <span class="line-number">29</span>)
+		<span class="method-title">utf8_is_ascii</span> (line <span class="line-number">31</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
@@ -89,10 +92,10 @@
 <li><div class="src-line">&nbsp;<span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$someString&nbsp;</span>=&nbsp;<a href="../../php-utf8/functions/_core---functions.php.html#functionutf8_strtolower">utf8_strtolower</a><span class="src-sym">(</span><span class="src-var">$someString</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
-</ol></div></p></p>
+</ol></div></p><p>Optionally the check can be performed with the control characters included.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> TRUE if it's all ASCII</li>
-				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---ascii.php.html#functionutf8_is_ascii_ctrl">utf8_is_ascii_ctrl()</a></li>
+				<li><span class="field">see:</span> utf8_is_ascii_ctrl</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -100,58 +103,30 @@
 		<span class="method-name">
 			utf8_is_ascii
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$check_ctrl_chars_too</span> = <span class="var-default">FALSE</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$str</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$check_ctrl_chars_too</span>			</li>
 				</ul>
 		
 	
 </div>
-<a name="functionutf8_is_ascii_ctrl" id="functionutf8_is_ascii_ctrl"><!-- --></a>
+<a name="functionutf8_to_ascii" id="functionutf8_to_ascii"><!-- --></a>
 <div class="evenrow">
 	
 	<div>
-		<span class="method-title">utf8_is_ascii_ctrl</span> (line <span class="line-number">44</span>)
+		<span class="method-title">utf8_to_ascii</span> (line <span class="line-number">62</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Tests whether a string contains only 7bit ASCII bytes with device control codes omitted.</p>
-<p class="description"><p>The device control codes can be found on the second table here: http://www.w3schools.com/tags/ref_ascii.asp</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> TRUE if it's all ASCII without device control codes</li>
-				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---ascii.php.html#functionutf8_is_ascii">utf8_is_ascii()</a></li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			utf8_is_ascii_ctrl
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
-			</div>
-
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$str</span>			</li>
-				</ul>
-		
-	
-</div>
-<a name="functionutf8_strip_ascii_ctrl" id="functionutf8_strip_ascii_ctrl"><!-- --></a>
-<div class="oddrow">
-	
-	<div>
-		<span class="method-title">utf8_strip_ascii_ctrl</span> (line <span class="line-number">93</span>)
-	</div> 
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Strip out device control codes in the ASCII range which are not permitted in XML.</p>
-<p class="description"><p>Note that this leaves multi-byte characters untouched - it only removes device control codes</p></p>
+<p class="short-description">Strip out all non-7bit ASCII bytes and, optionally, ASCII device control codes.</p>
+<p class="description"><p>If you need to transmit a string to system which you know can only support 7bit ASCII, you could use this function.</p><p>Optionally strip out device control codes in the ASCII range which are not permitted in XML.</p><p>Note that this leaves multi-byte characters untouched - it only removes device control codes</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> control codes removed</li>
 				<li><span class="field">see:</span> controlchar</li>
@@ -160,76 +135,18 @@
 	<div class="method-signature">
 		<span class="method-result">string</span>
 		<span class="method-name">
-			utf8_strip_ascii_ctrl
+			utf8_to_ascii
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">&#039;non_ascii&#039;</span>])
 			</div>
 
 			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$str</span>			</li>
-				</ul>
-		
-	
-</div>
-<a name="functionutf8_strip_non_ascii" id="functionutf8_strip_non_ascii"><!-- --></a>
-<div class="evenrow">
-	
-	<div>
-		<span class="method-title">utf8_strip_non_ascii</span> (line <span class="line-number">64</span>)
-	</div> 
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Strip out all non-7bit ASCII bytes.</p>
-<p class="description"><p>If you need to transmit a string to system which you know can only support 7bit ASCII, you could use this function.</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> with non ASCII bytes removed</li>
-				<li><span class="field">see:</span> <a href="../../php-utf8/utils/_utils---ascii.php.html#functionutf8_strip_non_ascii_ctrl">utf8_strip_non_ascii_ctrl()</a></li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			utf8_strip_non_ascii
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
-			</div>
-
-			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
-				<span class="var-name">$str</span>			</li>
-				</ul>
-		
-	
-</div>
-<a name="functionutf8_strip_non_ascii_ctrl" id="functionutf8_strip_non_ascii_ctrl"><!-- --></a>
-<div class="oddrow">
-	
-	<div>
-		<span class="method-title">utf8_strip_non_ascii_ctrl</span> (line <span class="line-number">121</span>)
-	</div> 
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Strip out all non 7bit ASCII bytes and ASCII device control codes.</p>
-<p class="description"><p>For a list of ASCII device control codes see the 2nd table here: http://www.w3schools.com/tags/ref_ascii.asp</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> TRUE if it's all ASCII</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			utf8_strip_non_ascii_ctrl
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
-			</div>
-
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$str</span>			</li>
+				<span class="var-name">$mode</span>			</li>
 				</ul>
 		
 	
@@ -238,7 +155,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 31 Jul 2010 22:06:57 +0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 03 Aug 2010 13:44:16 +0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

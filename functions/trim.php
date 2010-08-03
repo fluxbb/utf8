@@ -16,12 +16,12 @@
  * @see http://www.php.net/ltrim
  * @see http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php
  * @param string $str
- * @param boolean $charlist
+ * @param string $charlist
  * @return string
  */
-function utf8_ltrim($str, $charlist=false)
+function utf8_ltrim($str, $charlist = '')
 {
-	if( $charlist === false )
+	if( empty($charlist) )
 	{
 		return ltrim($str);
 	}
@@ -39,12 +39,12 @@ function utf8_ltrim($str, $charlist=false)
  * @see http://www.php.net/rtrim
  * @see http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php
  * @param string $str
- * @param boolean $charlist
+ * @param string $charlist
  * @return string 
  */
-function utf8_rtrim($str, $charlist=false)
+function utf8_rtrim($str, $charlist= '')
 {
-	if( $charlist === false )
+	if( empty($charlist) )
 	{
 		return rtrim($str);
 	}
@@ -65,9 +65,9 @@ function utf8_rtrim($str, $charlist=false)
  * @param boolean $charlist
  * @return string
  */
-function utf8_trim($str, $charlist=false)
+function utf8_trim($str, $charlist= '')
 {
-	if( $charlist === false )
+	if( $charlist === '' )
 	{
 		return trim($str);
 	}

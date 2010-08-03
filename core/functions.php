@@ -29,7 +29,7 @@ function utf8_strlen($str)
  * @param int $offset
  * @return int
  */
-function utf8_strpos($str, $search, $offset = false)
+function utf8_strpos($str, $search, $offset = FALSE)
 {
 	return call_user_func(PHP_UTF8_MODE.'_strpos',$str, $search, $offset);
 }
