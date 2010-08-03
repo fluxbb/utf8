@@ -46,6 +46,8 @@ function mbstring_strlen($str)
  */
 function mbstring_strpos($str, $search, $offset = FALSE)
 {
+	$str = utf8_bad_clean($str);
+
 	if( $offset === FALSE )
 	{
 		return mb_strpos($str, $search);
@@ -58,7 +60,7 @@ function mbstring_strpos($str, $search, $offset = FALSE)
  * Wrapper around mb_strrpos.
  *
  * Find position of last occurrence of a char in a string.
- * 
+ *
  * @param string $str haystack
  * @param string $search needle (you should validate this with utf8_is_valid)
  * @param integer $offset (optional) offset (from left)
@@ -66,6 +68,8 @@ function mbstring_strpos($str, $search, $offset = FALSE)
  */
 function mbstring_strrpos($str, $search, $offset = FALSE)
 {
+	$str = utf8_bad_clean($str);
+
 	if( !$offset )
 	{
 		// Emulate behaviour of strrpos rather than raising warning

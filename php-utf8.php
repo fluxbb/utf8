@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The dynamic loader for the PHP-UTF8 library.
  *
