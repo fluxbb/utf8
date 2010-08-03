@@ -78,4 +78,4 @@ if(!defined('UTF8_CORE'))
 	require UTF8.'/core/'.PHP_UTF8_MODE.'.php';
 }
 
-require UTF8.'/core/functions.php';
+#require UTF8.'/core/functions.php';

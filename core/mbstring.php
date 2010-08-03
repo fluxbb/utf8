@@ -29,7 +29,7 @@ require_once UTF8.'/utils/bad.php';
  * @param string $str UTF-8 string
  * @return int number of UTF-8 characters in string
  */
-function mbstring_strlen($str)
+function utf8_strlen($str)
 {
 	return mb_strlen($str);
 }
@@ -44,7 +44,7 @@ function mbstring_strlen($str)
  * @param integer offset in characters (from left)
  * @return mixed integer position or FALSE on failure
  */
-function mbstring_strpos($str, $search, $offset = FALSE)
+function utf8_strpos($str, $search, $offset = FALSE)
 {
 	$str = utf8_bad_clean($str);
 
@@ -66,7 +66,7 @@ function mbstring_strpos($str, $search, $offset = FALSE)
  * @param integer $offset (optional) offset (from left)
  * @return mixed integer position or FALSE on failure
  */
-function mbstring_strrpos($str, $search, $offset = FALSE)
+function utf8_strrpos($str, $search, $offset = FALSE)
 {
 	$str = utf8_bad_clean($str);
 
@@ -107,7 +107,7 @@ function mbstring_strrpos($str, $search, $offset = FALSE)
  * @param integer $length (optional) length in UTF-8 characters from offset
  * @return mixed string or FALSE if failure
  */
-function mbstring_substr($str, $offset, $length = FALSE)
+function utf8_substr($str, $offset, $length = FALSE)
 {
 	if( $length === FALSE )
 	{
@@ -128,7 +128,7 @@ function mbstring_substr($str, $offset, $length = FALSE)
  * @param string $str
  * @return mixed either string in lowercase or FALSE is UTF-8 invalid
  */
-function mbstring_strtolower($str)
+function utf8_strtolower($str)
 {
 	return mb_strtolower($str);
 }
@@ -145,7 +145,7 @@ function mbstring_strtolower($str)
  * @param string
  * @return mixed either string in lowercase or FALSE is UTF-8 invalid
  */
-function mbstring_strtoupper($str)
+function utf8_strtoupper($str)
 {
 	return mb_strtoupper($str);
 }

@@ -14,13 +14,13 @@ if( !defined('UTF8_CORE') )
 
 /**
  * Unicode aware replacement for strlen().
- * 
+ *
  * Returns the number of characters in the string (not the number of bytes),
  * replacing multibyte characters with a single byte equivalent utf8_decode()
  * converts characters that are not in ISO-8859-1 to '?', which, for the purpose
  * of counting, is alright.
  * It's much faster than iconv_strlen
- * 
+ *
  * Note: this function does not count bad UTF-8 bytes in the string, they are ignored.
  *
  * @author <chernyshevsky at hotmail dot com>
@@ -29,7 +29,7 @@ if( !defined('UTF8_CORE') )
  * @param string $str UTF-8 string
  * @return int number of UTF-8 characters in string
  */
-function native_strlen($str)
+function utf8_strlen($str)
 {
 	return strlen(utf8_decode($str));
 }
@@ -48,7 +48,7 @@ function native_strlen($str)
  * @param integer $offset offset in characters (from left)
  * @return mixed integer position or FALSE on failure
  */
-function native_strpos($str, $needle, $offset = false)
+function utf8_strpos($str, $needle, $offset = false)
 {
 	if( $offset === false )
 	{
@@ -92,7 +92,7 @@ function native_strpos($str, $needle, $offset = false)
  * @param integer $offset (optional) offset (from left)
  * @return mixed integer position or FALSE on failure
  */
-function native_strrpos($str, $needle, $offset = false)
+function utf8_strrpos($str, $needle, $offset = false)
 {
 	if( $offset === false )
 	{
@@ -152,7 +152,7 @@ function native_strrpos($str, $needle, $offset = false)
  * @param integer $length (optional) length in UTF-8 characters from offset
  * @return mixed string or FALSE if failure
  */
-function native_substr($str, $offset, $length = false)
+function utf8_substr($str, $offset, $length = false)
 {
 	// Generates E_NOTICE for PHP4 objects, but not PHP5 objects
 	$str = (string) $str;
@@ -293,7 +293,7 @@ function native_substr($str, $offset, $length = false)
  * @param string $string
  * @return mixed either string in lowercase or FALSE is UTF-8 invalid
  */
-function native_strtolower($string)
+function utf8_strtolower($string)
 {
 	$uni = utf8_to_unicode($string);
 
@@ -378,7 +378,7 @@ function native_strtolower($string)
  * @param string $string
  * @return mixed either string in lowercase or FALSE is UTF-8 invalid
  */
-function native_strtoupper($string)
+function utf8_strtoupper($string)
 {
 
 	$uni = utf8_to_unicode($string);
