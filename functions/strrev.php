@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UTF-8 aware alternative to strrev.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UTF-8 aware alternative to ucfirst.
  *
@@ -13,7 +14,7 @@
  */
 function utf8_ucfirst($str)
 {
-	switch( utf8_strlen($str) )
+	switch (utf8_strlen($str))
 	{
 		case 0:
 			return '';

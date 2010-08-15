@@ -9,10 +9,8 @@
 /**
  *  Define UTF8_CORE as required
  */
-if( !defined('UTF8_CORE') )
-{
+if (!defined('UTF8_CORE'))
 	define('UTF8_CORE', TRUE);
-}
 
 /*
  * utf8_strpos() and utf8_strrpos() need utf8_bad_strip() to strip invalid
@@ -44,14 +42,12 @@ function utf8_strlen($str)
  * @param integer offset in characters (from left)
  * @return mixed integer position or FALSE on failure
  */
-function utf8_strpos($str, $search, $offset = FALSE)
+function utf8_strpos($str, $search, $offset = false)
 {
 	$str = utf8_bad_clean($str);
 
-	if( $offset === FALSE )
-	{
+	if ($offset === false)
 		return mb_strpos($str, $search);
-	}
 
 	return mb_strpos($str, $search, $offset);
 }
@@ -66,35 +62,31 @@ function utf8_strpos($str, $search, $offset = FALSE)
  * @param integer $offset (optional) offset (from left)
  * @return mixed integer position or FALSE on failure
  */
-function utf8_strrpos($str, $search, $offset = FALSE)
+function utf8_strrpos($str, $search, $offset = false)
 {
 	$str = utf8_bad_clean($str);
 
-	if( !$offset )
+	if (!$offset)
 	{
 		// Emulate behaviour of strrpos rather than raising warning
-		if( empty($str) )
-		{
-			return FALSE;
-		}
+		if(empty($str))
+			return false;
 
 		return mb_strrpos($str, $search);
 	}
 
-	if( !is_int($offset) )
+	if (!is_int($offset))
 	{
 		trigger_error('utf8_strrpos expects parameter 3 to be long', E_USER_WARNING);
-		return FALSE;
+		return false;
 	}
 
 	$str = mb_substr($str, $offset);
 
-	if( ($pos = mb_strrpos($str, $search)) !== FALSE )
-	{
+	if (($pos = mb_strrpos($str, $search)) !== false)
 		return $pos + $offset;
-	}
 
-	return FALSE;
+	return false;
 }
 
 /**
@@ -107,12 +99,11 @@ function utf8_strrpos($str, $search, $offset = FALSE)
  * @param integer $length (optional) length in UTF-8 characters from offset
  * @return mixed string or FALSE if failure
  */
-function utf8_substr($str, $offset, $length = FALSE)
+function utf8_substr($str, $offset, $length = false)
 {
-	if( $length === FALSE )
-	{
+	if ($length === false)
 		return mb_substr($str, $offset);
-	}
+
 	return mb_substr($str, $offset, $length);
 }
 

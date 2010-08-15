@@ -1,8 +1,9 @@
 <?php
+
 /**
  * UTF-8 aware alternative to str_pad.
  *
- * $padStr may contain multi-byte characters.
+ * $pad_str may contain multi-byte characters.
  *
  * @author Oliver Saunders <oliver@osinternetservices.com>
  * @package php-utf8
@@ -11,45 +12,43 @@
  * @uses utf8_substr
  * @param string $input
  * @param int $length
- * @param string $padStr
+ * @param string $pad_str
  * @param int $type ( same constants as str_pad )
  * @return string
  */
-function utf8_str_pad($input, $length, $padStr=' ', $type=STR_PAD_RIGHT)
+function utf8_str_pad($input, $length, $pad_str=' ', $type = STR_PAD_RIGHT)
 {
-	$inputLen = utf8_strlen($input);
-	if( $length <= $inputLen )
-	{
+	$input_len = utf8_strlen($input);
+	if ($length <= $input_len)
 		return $input;
+
+	$pad_str_len = utf8_strlen($pad_str);
+	$pad_len = $length - $input_len;
+
+	if ($type == STR_PAD_RIGHT)
+	{
+		$repeat_times = ceil($pad_len / $pad_str_len);
+		return utf8_substr($input.str_repeat($pad_str, $repeat_times), 0, $length);
 	}
 
-	$padStrLen = utf8_strlen($padStr);
-	$padLen = $length - $inputLen;
-
-	if( $type == STR_PAD_RIGHT )
+	if ($type == STR_PAD_LEFT)
 	{
-		$repeatTimes = ceil($padLen / $padStrLen);
-		return utf8_substr($input.str_repeat($padStr, $repeatTimes), 0, $length);
+		$repeat_times = ceil($pad_len / $pad_str_len);
+		return utf8_substr(str_repeat($pad_str, $repeat_times), 0, floor($pad_len)).$input;
 	}
 
-	if( $type == STR_PAD_LEFT )
+	if ($type == STR_PAD_BOTH)
 	{
-		$repeatTimes = ceil($padLen / $padStrLen);
-		return utf8_substr(str_repeat($padStr, $repeatTimes), 0, floor($padLen)).$input;
-	}
+		$pad_len /= 2;
+		$pad_amount_left = floor($pad_len);
+		$pad_amount_right = ceil($pad_len);
+		$repeat_times_left = ceil($pad_amount_left / $pad_str_len);
+		$repeat_times_right = ceil($pad_amount_right / $pad_str_len);
 
-	if( $type == STR_PAD_BOTH )
-	{
-		$padLen /= 2;
-		$padAmountLeft = floor($padLen);
-		$padAmountRight = ceil($padLen);
-		$repeatTimesLeft = ceil($padAmountLeft / $padStrLen);
-		$repeatTimesRight = ceil($padAmountRight / $padStrLen);
+		$padding_left = utf8_substr(str_repeat($pad_str, $repeat_times_left), 0, $pad_amount_left);
+		$padding_right = utf8_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_right);
 
-		$paddingLeft = utf8_substr(str_repeat($padStr, $repeatTimesLeft), 0, $padAmountLeft);
-		$paddingRight = utf8_substr(str_repeat($padStr, $repeatTimesRight), 0, $padAmountLeft);
-
-		return $paddingLeft.$input.$paddingRight;
+		return $padding_left.$input.$padding_right;
 	}
 
 	trigger_error('utf8_str_pad: Unknown padding type ('.$type.')', E_USER_ERROR);

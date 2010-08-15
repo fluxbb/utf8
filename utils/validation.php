@@ -27,24 +27,22 @@
 function utf8_is_valid($str)
 {
 	$mState = 0;  // Cached expected number of octets after the current octet
-	// until the beginning of the next UTF8 character sequence
+	              // until the beginning of the next UTF8 character sequence
 	$mUcs4 = 0;  // Cached Unicode character
 	$mBytes = 1;  // Cached expected number of octets in the current sequence
 
 	$len = strlen($str);
 
-	for( $i = 0; $i < $len; $i++ )
+	for ($i = 0; $i < $len; $i++)
 	{
 		$in = ord($str{$i});
 
-		if( $mState == 0 )
+		if ($mState == 0)
 		{
 			// When mState is zero we expect either a US-ASCII character or a multi-octet sequence.
-			if( 0 == (0x80 & ($in)) )
-			{
+			if (0 == (0x80 & ($in)))
 				$mBytes = 1; // US-ASCII, pass straight through
-			}
-			elseif( 0xC0 == (0xE0 & ($in)) )
+			elseif (0xC0 == (0xE0 & ($in)))
 			{
 				// First octet of 2 octet sequence
 				$mUcs4 = ($in);
@@ -52,7 +50,7 @@ function utf8_is_valid($str)
 				$mState = 1;
 				$mBytes = 2;
 			}
-			elseif( 0xE0 == (0xF0 & ($in)) )
+			elseif (0xE0 == (0xF0 & ($in)))
 			{
 				// First octet of 3 octet sequence
 				$mUcs4 = ($in);
@@ -60,7 +58,7 @@ function utf8_is_valid($str)
 				$mState = 2;
 				$mBytes = 3;
 			}
-			elseif( 0xF0 == (0xF8 & ($in)) )
+			elseif (0xF0 == (0xF8 & ($in)))
 			{
 				// First octet of 4 octet sequence
 				$mUcs4 = ($in);
@@ -68,7 +66,7 @@ function utf8_is_valid($str)
 				$mState = 3;
 				$mBytes = 4;
 			}
-			elseif( 0xF8 == (0xFC & ($in)) )
+			elseif (0xF8 == (0xFC & ($in)))
 			{
 				/* First octet of 5 octet sequence.
 				 *
@@ -83,7 +81,7 @@ function utf8_is_valid($str)
 				$mState = 4;
 				$mBytes = 5;
 			}
-			elseif( 0xFC == (0xFE & ($in)) )
+			elseif (0xFC == (0xFE & ($in)))
 			{
 				// First octet of 6 octet sequence, see comments for 5 octet sequence.
 				$mUcs4 = ($in);
@@ -94,13 +92,13 @@ function utf8_is_valid($str)
 			else
 			{
 				// Current octet is neither in the US-ASCII range nor a legal first octet of a multi-octet sequence.
-				return FALSE;
+				return false;
 			}
 		}
 		else
 		{
 			// When mState is non-zero, we expect a continuation of the multi-octet sequence
-			if( 0x80 == (0xC0 & ($in)) )
+			if (0x80 == (0xC0 & ($in)))
 			{
 				// Legal continuation.
 				$shift = ($mState - 1) * 6;
@@ -112,20 +110,20 @@ function utf8_is_valid($str)
 				 * End of the multi-octet sequence. mUcs4 now contains the final
 				 * Unicode codepoint to be output
 				 */
-				if( 0 == --$mState )
+				if (0 == --$mState)
 				{
 					/*
 					 * Check for illegal sequences and codepoints.
 					 */
 					// From Unicode 3.1, non-shortest form is illegal
-					if( ((2 == $mBytes) && ($mUcs4 < 0x0080)) || ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
+					if (((2 == $mBytes) && ($mUcs4 < 0x0080)) || ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
 							((4 == $mBytes) && ($mUcs4 < 0x10000)) || (4 < $mBytes) ||
 							// From Unicode 3.2, surrogate characters are illegal
 							(($mUcs4 & 0xFFFFF800) == 0xD800) ||
 							// Codepoints outside the Unicode range are illegal
-							($mUcs4 > 0x10FFFF) )
+							($mUcs4 > 0x10FFFF))
 					{
-						return FALSE;
+						return false;
 					}
 
 					// Initialize UTF8 cache
@@ -140,25 +138,25 @@ function utf8_is_valid($str)
 				 * ((0xC0 & (*in) != 0x80) && (mState != 0))
 				 * Incomplete multi-octet sequence.
 				 */
-				return FALSE;
+				return false;
 			}
 		}
 	}
 
-	return TRUE;
+	return true;
 }
 
 /**
  * Tests whether a string complies as UTF-8. This will be much faster than
  * utf8_is_valid, but will pass five and six octet UTF-8 sequences,
- * which are not supported by Unicode and so cannot be displayed correctly 
- * in a browser. 
- * In other words it is not as strict as utf8_is_valid but it's faster. 
+ * which are not supported by Unicode and so cannot be displayed correctly
+ * in a browser.
+ * In other words it is not as strict as utf8_is_valid but it's faster.
  * If you use is to validate user input, you place yourself at the risk
  * that attackers will be able to inject 5 and 6 byte sequences (which may
  * or may not be a significant risk, depending on what you are are doing)
  * Note: Does not pass five and six octet UTF-8 sequences anymore in the unit tests.
- * 
+ *
  * @see utf8_is_valid
  * @see http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php#54805
  * @param string $str UTF-8 string to check
@@ -166,14 +164,12 @@ function utf8_is_valid($str)
  */
 function utf8_compliant($str)
 {
-	if( empty($str) )
-	{
-		return TRUE;
-	}
+	if(empty($str))
+		return true;
 
 	// If even just the first character can be matched, when the /u
 	// modifier is used, then it's valid UTF-8. If the UTF-8 is somehow
 	// invalid, nothing at all will match, even if the string contains
 	// some valid sequences
-	return (preg_match('/^.{1}/us', $str, $ar) == 1);
+	return preg_match('/^.{1}/us', $str, $ar) == 1;
 }

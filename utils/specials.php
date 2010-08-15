@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Utilities for processing "special" characters in UTF-8.
- * 
+ *
  * "Special" largely means anything which would be regarded as a non-word
  * character, like ASCII control characters and punctuation.
  * This has a "Roman" bias - it would be unaware of modern Chinese "punctuation"
@@ -15,8 +16,8 @@
 /**
  * Builds a PCRE pattern from the $UTF8_SPECIAL_CHARS array defined in this file.
  *
- * The $UTF8_SPECIAL_CHARS should contain all special characters 
- * (non-letter/non-digit) defined in the various local charsets - it's not a 
+ * The $UTF8_SPECIAL_CHARS should contain all special characters
+ * (non-letter/non-digit) defined in the various local charsets - it's not a
  * complete list of non-alphanum characters in UTF-8.
  * It's not perfect but should match most cases of special chars.
  * This function adds the control chars 0x00 to 0x19 to the array of special
@@ -32,7 +33,7 @@ function utf8_specials_pattern()
 {
 	static $pattern = null;
 
-	if( !$pattern )
+	if (!$pattern)
 	{
 		$UTF8_SPECIAL_CHARS = array(
 			0x001a, 0x001b, 0x001c, 0x001d, 0x001e, 0x001f, 0x0020, 0x0021, 0x0022, 0x0023,
@@ -84,7 +85,8 @@ function utf8_specials_pattern()
 			0xf8dd, 0xf8de, 0xf8df, 0xf8e0, 0xf8e1, 0xf8e2, 0xf8e3, 0xf8e4, 0xf8e5, 0xf8e6,
 			0xf8e7, 0xf8e8, 0xf8e9, 0xf8ea, 0xf8eb, 0xf8ec, 0xf8ed, 0xf8ee, 0xf8ef, 0xf8f0,
 			0xf8f1, 0xf8f2, 0xf8f3, 0xf8f4, 0xf8f5, 0xf8f6, 0xf8f7, 0xf8f8, 0xf8f9, 0xf8fa,
-			0xf8fb, 0xf8fc, 0xf8fd, 0xf8fe, 0xfe7c, 0xfe7d );
+			0xf8fb, 0xf8fc, 0xf8fd, 0xf8fe, 0xfe7c, 0xfe7d
+		);
 
 		$pattern = preg_quote(utf8_from_unicode($UTF8_SPECIAL_CHARS), '/');
 		$pattern = '/[\x00-\x19'.$pattern.']/u';
@@ -96,8 +98,8 @@ function utf8_specials_pattern()
 /**
  * Checks a string for whether it contains only word characters.
  *
- * This is logically equivalent to the \w PCRE meta character. 
- * Note that this is not a 100% guarantee that the string only contains 
+ * This is logically equivalent to the \w PCRE meta character.
+ * Note that this is not a 100% guarantee that the string only contains
  * alphanumeric characters but just that common non-alphanumeric aren't in the
  * string, including ASCII device control characters.
  *
@@ -107,7 +109,7 @@ function utf8_specials_pattern()
  */
 function utf8_is_word_chars($str)
 {
-	return!(bool) preg_match(utf8_specials_pattern(), $str);
+	return !(bool) preg_match(utf8_specials_pattern(), $str);
 }
 
 /**

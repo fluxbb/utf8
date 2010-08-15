@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UTF-8 aware alternative to strcasecmp.
  *
@@ -12,11 +13,11 @@
  * @param string $strY
  * @return int
  */
-function utf8_strcasecmp($strX, $strY)
+function utf8_strcasecmp($str_x, $str_y)
 {
-	$strX = utf8_strtolower($strX);
-	$strY = utf8_strtolower($strY);
+	$str_x = utf8_strtolower($str_x);
+	$str_y = utf8_strtolower($str_y);
 
-	return strcmp($strX, $strY);
+	return strcmp($str_x, $str_y);
 }
 

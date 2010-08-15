@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UTF-8 aware alternative to str_ireplace.
  *
@@ -18,16 +19,14 @@
  * @param int $count
  * @return string
  */
-function utf8_ireplace($search, $replace, $str, $count=null)
+function utf8_ireplace($search, $replace, $str, $count = null)
 {
-	if( !is_array($search) )
+	if (!is_array($search))
 	{
 		$slen = strlen($search);
 
-		if( $slen == 0 )
-		{
+		if ($slen == 0)
 			return $str;
-		}
 
 		$lendif = strlen($replace) - strlen($search);
 		$search = utf8_strtolower($search);
@@ -37,12 +36,10 @@ function utf8_ireplace($search, $replace, $str, $count=null)
 		$i = 0;
 		$matched = 0;
 
-		while( preg_match('/(.*)'.$search.'/Us', $lstr, $matches) )
+		while (preg_match('/(.*)'.$search.'/Us', $lstr, $matches))
 		{
-			if( $i === $count )
-			{
+			if ($i === $count)
 				break;
-			}
 
 			$mlen = strlen($matches[0]);
 			$lstr = substr($lstr, $mlen);
@@ -55,23 +52,17 @@ function utf8_ireplace($search, $replace, $str, $count=null)
 	}
 	else
 	{
-		foreach( array_keys($search) as $k )
+		foreach (array_keys($search) as $k)
 		{
-			if( is_array($replace) )
+			if (is_array($replace))
 			{
-				if( array_key_exists($k, $replace) )
-				{
+				if(array_key_exists($k, $replace))
 					$str = utf8_ireplace($search[$k], $replace[$k], $str, $count);
-				}
 				else
-				{
 					$str = utf8_ireplace($search[$k], '', $str, $count);
-				}
 			}
 			else
-			{
 				$str = utf8_ireplace($search[$k], $replace, $str, $count);
-			}
 		}
 
 		return $str;

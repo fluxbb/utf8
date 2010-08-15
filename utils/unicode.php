@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tools for conversion between UTF-8 and unicode
  * The Original Code is Mozilla Communicator client code.
@@ -31,27 +32,27 @@
 function utf8_to_unicode($str)
 {
 	$mState = 0; // Cached expected number of octets after the current octet
-	// until the beginning of the next UTF8 character sequence
+	             // until the beginning of the next UTF8 character sequence
 	$mUcs4 = 0; // Cached Unicode character
 	$mBytes = 1; // Cached expected number of octets in the current sequence
 
-	$out = array( );
+	$out = array();
 	$len = strlen($str);
 
-	for( $i = 0; $i < $len; $i++ )
+	for ($i = 0; $i < $len; $i++)
 	{
 		$in = ord($str[$i]);
 
-		if( $mState == 0 )
+		if ($mState == 0)
 		{
 			// When mState is zero we expect either a US-ASCII character or a multi-octet sequence.
-			if( 0 == (0x80 & ($in)) )
+			if (0 == (0x80 & ($in)))
 			{
 				// US-ASCII, pass straight through.
 				$out[] = $in;
 				$mBytes = 1;
 			}
-			elseif( 0xC0 == (0xE0 & ($in)) )
+			elseif (0xC0 == (0xE0 & ($in)))
 			{
 				// First octet of 2 octet sequence
 				$mUcs4 = ($in);
@@ -59,7 +60,7 @@ function utf8_to_unicode($str)
 				$mState = 1;
 				$mBytes = 2;
 			}
-			elseif( 0xE0 == (0xF0 & ($in)) )
+			elseif (0xE0 == (0xF0 & ($in)))
 			{
 				// First octet of 3 octet sequence
 				$mUcs4 = ($in);
@@ -67,7 +68,7 @@ function utf8_to_unicode($str)
 				$mState = 2;
 				$mBytes = 3;
 			}
-			elseif( 0xF0 == (0xF8 & ($in)) )
+			elseif (0xF0 == (0xF8 & ($in)))
 			{
 				// First octet of 4 octet sequence
 				$mUcs4 = ($in);
@@ -75,7 +76,7 @@ function utf8_to_unicode($str)
 				$mState = 3;
 				$mBytes = 4;
 			}
-			elseif( 0xF8 == (0xFC & ($in)) )
+			elseif (0xF8 == (0xFC & ($in)))
 			{
 				/* First octet of 5 octet sequence.
 				 *
@@ -90,7 +91,7 @@ function utf8_to_unicode($str)
 				$mState = 4;
 				$mBytes = 5;
 			}
-			elseif( 0xFC == (0xFE & ($in)) )
+			elseif (0xFC == (0xFE & ($in)))
 			{
 				// First octet of 6 octet sequence, see comments for 5 octet sequence.
 				$mUcs4 = ($in);
@@ -108,7 +109,7 @@ function utf8_to_unicode($str)
 		else
 		{
 			// When mState is non-zero, we expect a continuation of the multi-octet sequence
-			if( 0x80 == (0xC0 & ($in)) )
+			if (0x80 == (0xC0 & ($in)))
 			{
 				// Legal continuation.
 				$shift = ($mState - 1) * 6;
@@ -120,28 +121,26 @@ function utf8_to_unicode($str)
 				 * End of the multi-octet sequence. mUcs4 now contains the final
 				 * Unicode codepoint to be output
 				 */
-				if( 0 == --$mState )
+				if (0 == --$mState)
 				{
 					/*
 					 * Check for illegal sequences and codepoints.
 					 */
 					// From Unicode 3.1, non-shortest form is illegal
-					if( ((2 == $mBytes) && ($mUcs4 < 0x0080)) || ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
+					if (((2 == $mBytes) && ($mUcs4 < 0x0080)) || ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
 							((4 == $mBytes) && ($mUcs4 < 0x10000)) || (4 < $mBytes) ||
 							// From Unicode 3.2, surrogate characters are illegal
 							(($mUcs4 & 0xFFFFF800) == 0xD800) ||
 							// Codepoints outside the Unicode range are illegal
-							($mUcs4 > 0x10FFFF) )
+							($mUcs4 > 0x10FFFF))
 					{
 						trigger_error('utf8_to_unicode: Illegal sequence or codepoint in UTF-8 at byte '.$i, E_USER_WARNING);
 						return false;
 					}
 
 					// BOM is legal but we don't want to output it
-					if( 0xFEFF != $mUcs4 )
-					{
+					if (0xFEFF != $mUcs4)
 						$out[] = $mUcs4;
-					}
 
 					// Initialize UTF8 cache
 					$mState = 0;
@@ -179,35 +178,32 @@ function utf8_from_unicode($arr)
 {
 	ob_start();
 
-	foreach( array_keys($arr) as $k )
+	foreach(array_keys($arr) as $k)
 	{
-		if( ($arr[$k] >= 0) && ($arr[$k] <= 0x007f) ) // ASCII range (including control chars)
-		{
+		if(($arr[$k] >= 0) && ($arr[$k] <= 0x007f)) // ASCII range (including control chars)
 			echo chr($arr[$k]);
-		}
-		elseif( $arr[$k] <= 0x07ff ) //2 byte sequence
+		elseif ($arr[$k] <= 0x07ff) // 2 byte sequence
 		{
 			echo chr(0xc0 | ($arr[$k] >> 6));
 			echo chr(0x80 | ($arr[$k] & 0x003f));
 		}
-		elseif( $arr[$k] == 0xFEFF ) // Byte order mark (skip)
+		elseif ($arr[$k] == 0xFEFF) // Byte order mark (skip)
 		{
 			// Nop -- zap the BOM
 		}
-		elseif( $arr[$k] >= 0xD800 && $arr[$k] <= 0xDFFF ) // Test for illegal surrogates
+		elseif ($arr[$k] >= 0xD800 && $arr[$k] <= 0xDFFF) // Test for illegal surrogates
 		{
 			// Found a surrogate
 			trigger_error('utf8_from_unicode: Illegal surrogate at index: '.$k.', value: '.$arr[$k], E_USER_WARNING);
-
 			return false;
 		}
-		elseif( $arr[$k] <= 0xffff ) // 3 byte sequence
+		elseif ($arr[$k] <= 0xffff) // 3 byte sequence
 		{
 			echo chr(0xe0 | ($arr[$k] >> 12));
 			echo chr(0x80 | (($arr[$k] >> 6) & 0x003f));
 			echo chr(0x80 | ($arr[$k] & 0x003f));
 		}
-		elseif( $arr[$k] <= 0x10ffff ) // 4 byte sequence
+		elseif ($arr[$k] <= 0x10ffff) // 4 byte sequence
 		{
 			echo chr(0xf0 | ($arr[$k] >> 18));
 			echo chr(0x80 | (($arr[$k] >> 12) & 0x3f));
@@ -216,9 +212,8 @@ function utf8_from_unicode($arr)
 		}
 		else
 		{
-			trigger_error('utf8_from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k], E_USER_WARNING);
-
 			// Out of range
+			trigger_error('utf8_from_unicode: Codepoint out of Unicode range at index: '.$k.', value: '.$arr[$k], E_USER_WARNING);
 			return false;
 		}
 	}

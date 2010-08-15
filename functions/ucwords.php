@@ -1,7 +1,8 @@
 <?php
+
 /**
  * UTF-8 aware alternative to ucwords.
- * 
+ *
  * @package php-utf8
  * @subpackage functions
  */
@@ -29,7 +30,7 @@ function utf8_ucwords($str)
 /**
  * Callback function for preg_replace_callback call in utf8_ucwords.
  * You don't need to call this yourself.
- * 
+ *
  * @access private
  * @uses utf8_ucwords
  * @uses utf8_strtoupper

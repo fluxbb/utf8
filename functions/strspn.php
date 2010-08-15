@@ -1,4 +1,5 @@
 <?php
+
 /**
  * UTF-8 aware alternative to strspn.
  *
@@ -19,17 +20,13 @@ function utf8_strspn($str, $mask, $start=null, $length=null)
 {
 	$mask = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $mask);
 
-	if( $start !== null || $length !== null )
-	{
+	if ($start !== null || $length !== null)
 		$str = utf8_substr($str, $start, $length);
-	}
 
 	preg_match('/^['.$mask.']+/u', $str, $matches);
 
-	if( isset($matches[0]) )
-	{
+	if (isset($matches[0]))
 		return utf8_strlen($matches[0]);
-	}
 
 	return 0;
 }

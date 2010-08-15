@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tools for locating/replacing bad bytes in UTF-8 strings.
  * The Original Code is Mozilla Communicator client code.
@@ -30,10 +31,10 @@
  * @param boolean $first_only
  * @return mixed integer byte index or FALSE if no bad found
  */
-function utf8_bad_find($str, $first_only = TRUE)
+function utf8_bad_find($str, $first_only = true)
 {
 	$pos = 0;
-	$badList = array( );
+	$bad_list = array( );
 
 	while (preg_match('/'.PHP_UTF8_BAD_UTF_PATTERN.'/S', $str, $matches))
 	{
@@ -42,19 +43,18 @@ function utf8_bad_find($str, $first_only = TRUE)
 		if (isset($matches[2]))
 		{
 			if ($first_only)
-			{
 				return $pos;
-			}
-			$badList[] = $pos;
+
+			$bad_list[] = $pos;
 		}
 
 		$pos += $bytes;
 		$str = substr($str, $bytes);
 	}
 
-	if (count($badList) > 0)
+	if (!empty($bad_list))
 	{
-		return $badList;
+		return $bad_list;
 	}
 
 	return false;
@@ -71,20 +71,16 @@ function utf8_bad_find($str, $first_only = TRUE)
  * @param string $str
  * @return string
  */
-function utf8_bad_clean($str, $replace = FALSE)
+function utf8_bad_clean($str, $replace = false)
 {
 	ob_start();
 
 	while (preg_match('/'.PHP_UTF8_BAD_UTF_PATTERN.'/S', $str, $matches))
 	{
 		if (!isset($matches[2]))
-		{
 			echo $matches[0];
-		}
-		elseif (($replace !== FALSE) &&( is_string($replace)))
-		{
+		elseif (($replace !== false) && ( is_string($replace)))
 			echo $replace;
-		}
 
 		$str = substr($str, strlen($matches[0]));
 	}
@@ -168,10 +164,10 @@ define('PHP_UTF8_BAD_SEQINCOMPLETE', 7);
  */
 function utf8_bad_identify($str, &$i)
 {
-	$mState = 0;  // Cached expected number of octets after the current octet
-	// until the beginning of the next UTF8 character sequence
-	$mUcs4 = 0;  // Cached Unicode character
-	$mBytes = 1;  // Cached expected number of octets in the current sequence
+	$mState = 0; // Cached expected number of octets after the current octet
+	             // until the beginning of the next UTF8 character sequence
+	$mUcs4 = 0; // Cached Unicode character
+	$mBytes = 1; // Cached expected number of octets in the current sequence
 
 	$len = strlen($str);
 
@@ -179,7 +175,7 @@ function utf8_bad_identify($str, &$i)
 	{
 		$in = ord($str{$i});
 
-		if ($mState == 0 )
+		if ($mState == 0)
 		{
 			// When mState is zero we expect either a US-ASCII character or a multi-octet sequence.
 			if (0 == (0x80 & ($in)))
@@ -252,17 +248,11 @@ function utf8_bad_identify($str, &$i)
 				{
 					// From Unicode 3.1, non-shortest form is illegal
 					if (((2 == $mBytes) && ($mUcs4 < 0x0080)) || ((3 == $mBytes) && ($mUcs4 < 0x0800)) || ((4 == $mBytes) && ($mUcs4 < 0x10000)) )
-					{
 						return PHP_UTF8_BAD_NONSHORT;
-					}
 					elseif (($mUcs4 & 0xFFFFF800) == 0xD800 ) // From Unicode 3.2, surrogate characters are illegal
-					{
 						return PHP_UTF8_BAD_SURROGATE;
-					}
 					elseif ($mUcs4 > 0x10FFFF ) // Codepoints outside the Unicode range are illegal
-					{
 						return PHP_UTF8_BAD_UNIOUTRANGE;
-					}
 
 					// Initialize UTF8 cache
 					$mState = 0;
@@ -302,20 +292,23 @@ function utf8_bad_identify($str, &$i)
  */
 function utf8_bad_explain($code)
 {
-	$errors = array(
-		PHP_UTF8_BAD_5OCTET => 'Five octet sequences are valid UTF-8 but are not supported by Unicode',
-		PHP_UTF8_BAD_6OCTET => 'Six octet sequences are valid UTF-8 but are not supported by Unicode',
-		PHP_UTF8_BAD_SEQID => 'Invalid octet for use as start of multi-byte UTF-8 sequence',
-		PHP_UTF8_BAD_NONSHORT => 'From Unicode 3.1, non-shortest form is illegal',
-		PHP_UTF8_BAD_SURROGATE => 'From Unicode 3.2, surrogate characters are illegal',
-		PHP_UTF8_BAD_UNIOUTRANGE => 'Codepoints outside the Unicode range are illegal',
-		PHP_UTF8_BAD_SEQINCOMPLETE => 'Incomplete multi-octet sequence',
-	);
+	static $errors;
 
-	if (array_key_exists($code, $errors))
+	if (!$errors)
 	{
-		trigger_error('Unknown error code: '.$errors[$code], E_USER_WARNING);
+		$errors = array(
+			PHP_UTF8_BAD_5OCTET => 'Five octet sequences are valid UTF-8 but are not supported by Unicode',
+			PHP_UTF8_BAD_6OCTET => 'Six octet sequences are valid UTF-8 but are not supported by Unicode',
+			PHP_UTF8_BAD_SEQID => 'Invalid octet for use as start of multi-byte UTF-8 sequence',
+			PHP_UTF8_BAD_NONSHORT => 'From Unicode 3.1, non-shortest form is illegal',
+			PHP_UTF8_BAD_SURROGATE => 'From Unicode 3.2, surrogate characters are illegal',
+			PHP_UTF8_BAD_UNIOUTRANGE => 'Codepoints outside the Unicode range are illegal',
+			PHP_UTF8_BAD_SEQINCOMPLETE => 'Incomplete multi-octet sequence'
+		);
 	}
+
+	if (isset($errors[$code]))
+		trigger_error('Unknown error code: '.$errors[$code], E_USER_WARNING);
 
 	return false;
 }

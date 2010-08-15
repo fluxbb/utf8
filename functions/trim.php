@@ -4,7 +4,7 @@
  *
  * Use these only if you are supplying the charlist optional arg and it contains
  * UTF-8 characters. Otherwise trim will work normally on a UTF-8 string.
- * 
+ *
  * @package php-utf8
  * @subpackage functions
  */
@@ -21,10 +21,8 @@
  */
 function utf8_ltrim($str, $charlist = '')
 {
-	if( empty($charlist) )
-	{
+	if(empty($charlist))
 		return ltrim($str);
-	}
 
 	// Quote charlist for use in a characterclass
 	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
@@ -40,14 +38,12 @@ function utf8_ltrim($str, $charlist = '')
  * @see http://dev.splitbrain.org/view/darcs/dokuwiki/inc/utf8.php
  * @param string $str
  * @param string $charlist
- * @return string 
+ * @return string
  */
 function utf8_rtrim($str, $charlist= '')
 {
-	if( empty($charlist) )
-	{
+	if(empty($charlist))
 		return rtrim($str);
-	}
 
 	// Quote charlist for use in a characterclass
 	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
@@ -67,10 +63,8 @@ function utf8_rtrim($str, $charlist= '')
  */
 function utf8_trim($str, $charlist= '')
 {
-	if( $charlist === '' )
-	{
+	if(empty($charlist))
 		return trim($str);
-	}
 
 	return utf8_ltrim(utf8_rtrim($str, $charlist), $charlist);
 }
