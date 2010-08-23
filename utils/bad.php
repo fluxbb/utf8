@@ -79,7 +79,7 @@ function utf8_bad_clean($str, $replace = false)
 	{
 		if (!isset($matches[2]))
 			echo $matches[0];
-		elseif (($replace !== false) && ( is_string($replace)))
+		elseif ($replace !== false && is_string($replace))
 			echo $replace;
 
 		$str = substr($str, strlen($matches[0]));

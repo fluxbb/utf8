@@ -173,8 +173,8 @@ function utf8_substr($str, $offset, $length = false)
 			$offset = 0;
 	}
 
-	$op = '';
-	$lp = '';
+	$offset_pattern = '';
+	$length_pattern = '';
 
 	// Establish a pattern for offset, a
 	// non-captured group equal in length to offset
@@ -184,22 +184,22 @@ function utf8_substr($str, $offset, $length = false)
 		$oy = $offset % 65535;
 
 		if ($ox)
-			$op = '(?:.{65535}){'.$ox.'}';
+			$offset_pattern = '(?:.{65535}){'.$ox.'}';
 
-		$op = '^(?:'.$op.'.{'.$oy.'})';
+		$offset_pattern = '^(?:'.$offset_pattern.'.{'.$oy.'})';
 	}
 	else
-		$op = '^';
+		$offset_pattern = '^';
 
 
 	// Establish a pattern for length
 	if (!$length)
-		$lp = '(.*)$'; // The rest of the string
+		$length_pattern = '(.*)$'; // The rest of the string
 	else
 	{
 		// See notes
 		if (!isset($strlen))
-			$strlen = strlen(utf8_decode($str));
+			$strlen = utf8_strlen($str);
 
 		// Another trivial case
 		if ($offset > $strlen)
@@ -215,9 +215,9 @@ function utf8_substr($str, $offset, $length = false)
 
 			// Negative length requires a captured group of length characters
 			if ($lx)
-				$lp = '(?:.{65535}){'.$lx.'}';
+				$length_pattern = '(?:.{65535}){'.$lx.'}';
 
-			$lp = '('.$lp.'.{'.$ly.'})';
+			$length_pattern = '('.$length_pattern.'.{'.$ly.'})';
 		}
 		elseif ($length < 0)
 		{
@@ -230,13 +230,13 @@ function utf8_substr($str, $offset, $length = false)
 			// Negative length requires ... capture everything except a group of
 			// -length characters anchored at the tail-end of the string
 			if ($lx)
-				$lp = '(?:.{65535}){'.$lx.'}';
+				$length_pattern = '(?:.{65535}){'.$lx.'}';
 
-			$lp = '(.*)(?:'.$lp.'.{'.$ly.'})$';
+			$length_pattern = '(.*)(?:'.$length_pattern.'.{'.$ly.'})$';
 		}
 	}
 
-	if(!preg_match('#'.$op.$lp.'#us', $str, $match))
+	if(!preg_match('#'.$offset_pattern.$length_pattern.'#us', $str, $match))
 		return '';
 
 	return $match[1];
