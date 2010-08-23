@@ -1,0 +1,72 @@
+Coding standards
+================
+
+Files
+-----
+
+Files must be UTF-8 encoded and only contain Unix linebreaks (\n).
+
+When a file ends with PHP code a PHP closing tag is not needed.
+
+
+If/elseif/else/while/for/foreach
+--------------------------------
+
+Curly brackets are on their own lines and there are not spaces inside the
+parenthesis.
+
+    $var = true;
+
+    if ($var)
+    {
+        ...
+    }
+    elseif (!$var)
+    {
+        ...
+    }
+    else
+    {
+        ...
+    }
+
+When the if/elseif/else only contains one statement the curly brackets are not
+needed.
+
+    if ($var)
+        ...
+    elseif (!$var)
+        ...
+    else
+    {
+        ...
+
+The same rules are applied to while/for/foreach.
+
+
+Funtions/Classes
+----------------
+
+Functions and classes also have the curly brackets on their own lines. Function
+arguments with default values are done like it is done in the example code below.
+Function names only consist of lowercase characters and underscores. Class names
+are CamelCase and underscores are also allowed.
+
+    function some_function($var, $var_2 = false)
+    {
+        ...
+    }
+
+    class SomeClass
+    {
+        public function some_function_in_a_class($var = 1)
+        {
+            ...
+        }
+    }
+
+
+Variables
+---------
+
+Variable names only consist of lowercase characters and underscores.
