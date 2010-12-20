@@ -13,6 +13,8 @@
 */
 require_once dirname(__FILE__).'/../config.php';
 
+echo PHP_UTF8_MODE;
+
 /**
 * @package utf8
 * @subpackage Tests

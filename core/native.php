@@ -29,7 +29,7 @@ if(!defined('UTF8_CORE'))
  */
 function utf8_strlen($str)
 {
-	return strlen(utf8_decode($str));
+	return strlen(utf8_decode(utf8_bad_clean($str)));
 }
 
 /**
