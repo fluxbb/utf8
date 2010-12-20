@@ -1,39 +1,11 @@
 <?php
 
-define('TEST_RUNNING', true);
+header('Content-type: text/plain; charset=utf-8');
 
-require_once 'config.php';
+require '../php-utf8.php';
+require './testlib.php';
 
-class AllTests extends TestSuite
-{
-	function AllTests()
-	{
-		$this->TestSuite('All PHPUTF8 Tests');
-		$this->loadGroups();
-	}
+$tester = new TestLib('php-utf8 Unit Tests', './cases');
 
-	function loadGroups()
-	{
-		$path = dirname(__FILE__).'/cases';
-
-		if ($d = opendir($path))
-		{
-			while (($file = readdir($d)) !== false)
-			{
-				if (is_file($path.'/'.$file))
-				{
-					$farray = explode('.',$file);
-
-					if ($farray[1] == 'test')
-						$this->AddTestFile($path.'/'.$file);
-				}
-			}
-
-			closedir($d);
-		}
-	}
-}
-
-// Run the tests
-$test = new AllTests();
-$test->run(getTestReporter());
+echo $tester->run_tests()
+            ->text_report();
