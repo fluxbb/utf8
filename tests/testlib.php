@@ -10,18 +10,39 @@
 --- */
 
 
+/**
+ * A class that looks in a directory for test cases, runs all of them and then
+ * prints a text-based report.
+ */
 class TestLib
 {
 	protected $title = ''
 	        , $directory = ''
 	        , $testcases = array();
 
+	/**
+	 * Set test group title and directory.
+	 *
+	 * @access  public
+	 * @param   string  $testgroup_title      The title of the test group.
+	 * @param   string  $testgroup_directory  The directory where all the test
+	 *          cases are located.
+	 */
 	public function __construct($testgroup_title, $testgroup_directory)
 	{
 		$this->title = $testgroup_title;
 		$this->directory = $testgroup_directory;
 	}
 
+	/**
+	 * Search the directory for test cases. Once a test case has been found
+	 * a instance will be made and stored in an array. All files ending with
+	 * Test.php will be loaded. The class inside a file must have the same
+	 * name as the file itself (without the extension).
+	 *
+	 * @access  protected
+	 * @return  array  An array with instances of all the test cases.
+	 */
 	protected function _get_tests()
 	{
 		$tests = array();
@@ -35,39 +56,49 @@ class TestLib
 			require realpath($this->directory.'/'.$f->getFilename());
 			$class_name = $f->getBasename('.php');
 
-			$tests[$class_name] = new $class_name();
+			$tests[] = new $class_name();
 		}
 
 		return $tests;
 	}
 
+	/**
+	 * Run all the test cases.
+	 *
+	 * @access  public
+	 * @return  object  An instance of the TestLib class for method chaining.
+	 */
 	public function run_tests()
 	{
 		$this->testcases = $this->_get_tests();
 
-		foreach ($this->testcases as $name => $testcase)
-		{
+		foreach ($this->testcases as $testcase)
 			$testcase->run();
-		}
 
 		return $this;
 	}
 
+	/**
+	 * Generate a text-based report from the results of the test cases.
+	 *
+	 * @access  public
+	 * @return  string  The generated test report.
+	 */
 	public function text_report()
 	{
 		$passed = 0;
 		$failed = 0;
 		$output = '';
 
-		$output .= '# '.$this->title." #\n\n-----\n\n";
+		$output .= '# '.$this->title." #\n\n-----\n";
 
-		foreach ($this->testcases as $name => $testcase)
+		foreach ($this->testcases as $testcase)
 		{
-			$output .= $testcase->name()."\n";
+			$output .= "\n".$testcase->name()."\n";
 
 			foreach ($testcase->results() as $method => $result)
 			{
-				$output .= '  '.$method.': '.($result ? 'passed' : 'failed')."\n";
+				$output .= '  '.$method.': '.($result ? 'passed' : '*failed*')."\n";
 				($result ? $passed++ : $failed++);
 			}
 
@@ -81,17 +112,35 @@ class TestLib
 }
 
 
-class TestLibCase
+/**
+ * An abstract base class for a test case. This class holds all the methods
+ * for testing and storing the results.
+ *
+ * @abstract
+ */
+abstract class TestLibTestCase
 {
 	private $methods = array()
 	      , $results = array();
 
+	/**
+	 * Load all test methods in the current class ans store them.
+	 *
+	 * @access  public
+	 */
 	public function __construct()
 	{
-		$this->methods = $this->_get_tests();
+		$this->methods = $this->_get_test_methods();
 	}
 
-	private function _get_tests()
+	/**
+	 * Look for test methods in the current class. All methods starting with
+	 * test_ are stored in an array an are returned.
+	 *
+	 * @access  private
+	 * @return  array  All the names of the test methods.
+	 */
+	private function _get_test_methods()
 	{
 		$methods = array();
 
@@ -104,53 +153,84 @@ class TestLibCase
 		return $methods;
 	}
 
-	private function _add_result($result)
+	/**
+	 * Store the result of a test with the name of the test method in an array.
+	 * This function is called methods such as TestLibCase::equal().
+	 *
+	 * @access  private
+	 * @param   boolean  $result  The result of a test.
+	 */
+	private function _store_result($result)
 	{
 		$backtrace = debug_backtrace();
 		$this->results[$backtrace[2]['function']] = $result;
 	}
 
+	/**
+	 * Run all the tests in the current test case.
+	 *
+	 * @access  public
+	 */
 	public function run()
 	{
 		foreach ($this->methods as $method)
 			$this->$method();
-
-		return $this;
 	}
 
+	/**
+	 * Return the name of the current test case.
+	 *
+	 * @access  public
+	 */
 	public function name()
 	{
 		return get_class($this);
 	}
 
+	/**
+	 * Return the results of the test case.
+	 *
+	 * @access  public
+	 * @return  array  An array with all the test results. The method name is
+	 *                 is used at the key and the test result is the value.
+	 */
 	public function results()
 	{
 		return $this->results;
 	}
 
-	public function equal($var1, $var2)
+	/**
+	 * Test if two values are equal. This function should be used inside a
+	 * test case.
+	 *
+	 * @access  public
+	 * @param   mixed  $var1  The first value.
+	 * @param   mixed  $var2  The second value.
+	 */
+	public function is_equal($var1, $var2)
 	{
-		$this->_add_result($var1 == $var2);
+		$this->_store_result($var1 == $var2);
+	}
 
-		return $this;
+	/**
+	 * Test if a value is true. This function should be used inside a test case.
+	 *
+	 * @access  public
+	 * @param   mixed  $var1  The first value.
+	 */
+	public function is_true($var1)
+	{
+		$this->_store_result($var1 === true);
+	}
+
+	/**
+	 * Test if a value is false. This function should be used inside a test case.
+	 *
+	 * @access  public
+	 * @param   mixed  $var1  The first value.
+	 */
+	public function is_false($var1)
+	{
+		$this->_store_result($var1 === false);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
