@@ -140,3 +140,20 @@ function utf8_strtoupper($str)
 {
 	return mb_strtoupper($str);
 }
+
+/**
+ * UTF-8 aware alternative to ucwords.
+ *
+ * Uppercase the first character of each word in a string using mb_convert_case.
+ *
+ * @see http://php.net/manual/en/function.ucwords.php
+ * @see http://php.net/manual/en/function.mb-convert-case.php
+ * @uses utf8_substr_replace
+ * @uses utf8_strtoupper
+ * @param string
+ * @return string with first char of each word uppercase
+ */
+function utf8_ucwords($str)
+{
+	return mb_convert_case($str, MB_CASE_TITLE, 'UTF-8');
+}
