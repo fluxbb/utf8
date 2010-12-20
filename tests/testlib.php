@@ -233,4 +233,15 @@ abstract class TestLibTestCase
 	{
 		$this->_store_result($var1 === false);
 	}
+
+	/**
+	 * Test if a value is null. This function should be used inside a test case.
+	 *
+	 * @access  public
+	 * @param   mixed  $var1  The first value.
+	 */
+	public function is_null($var1)
+	{
+		$this->_store_result(is_null($var1));
+	}
 }
