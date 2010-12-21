@@ -7,7 +7,9 @@
 
 	testlib is a simple unit testing library.
 
-	Copyright (c) 2010, Frank Smit
+	Version: 0.1.2
+
+	Copyright (c) 2010, Frank Smit <frank/61924/nl>
 	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without
@@ -114,20 +116,51 @@ class TestLib
 		$passed = 0;
 		$failed = 0;
 		$output = '';
+		$failures = array();
 
 		$output .= '# '.$this->title." #\n\n-----\n";
 
+		// List all results grouped by test case
 		foreach ($this->testcases as $testcase)
 		{
 			$output .= "\n".$testcase->name()."\n";
 
-			foreach ($testcase->results() as $method => $result)
-			{
-				$output .= '  '.$method.': '.($result ? 'passed' : '*failed*')."\n";
-				($result ? $passed++ : $failed++);
-			}
+			$tmp = $testcase->failures();
+			if (!empty($tmp))
+				$failures[$testcase->name()] = $tmp;
 
-			$result .= "\n";
+			foreach ($testcase->results() as $method => $results)
+			{
+				$test_passed = true;
+
+				// Loop through all the results of the test. When one of the
+				// results if false, the test failed.
+				foreach ($results as $result)
+				{
+					if (!$result)
+					{
+						$test_passed = false;
+						break;
+					}
+				}
+
+				$output .= '  '.$method.': '.($test_passed ? 'passed' : '*failed*')."\n";
+				($test_passed ? $passed++ : $failed++);
+			}
+		}
+
+		// List all failures with details grouped by test case if there are failures
+		if (!empty($failures))
+		{
+			$output .= "\n-----\n\nFailures:\n";
+
+			foreach ($failures as $testcase_name => $failure)
+			{
+				$output .= "\n".$testcase_name."\n";
+
+				foreach ($failure as $f)
+					$output .= sprintf('  %s -> %s -> line %d in %s'."\n", $f['method'], $f['test'], $f['line'], $f['file']);
+			}
 		}
 
 		$output .= "\n-----\n\nResults:\n  Passed: ".$passed."\n  Failed: ".$failed;
@@ -146,7 +179,8 @@ class TestLib
 abstract class TestLibTestCase
 {
 	private $methods = array()
-	      , $results = array();
+	      , $results = array()
+	      , $failures = array();
 
 	/**
 	 * Load all test methods in the current class ans store them.
@@ -188,7 +222,23 @@ abstract class TestLibTestCase
 	private function _store_result($result)
 	{
 		$backtrace = debug_backtrace();
-		$this->results[$backtrace[2]['function']] = $result;
+
+		// Log a failure
+		if (!$result)
+		{
+			$this->failures[] = array(
+				'method' => $backtrace[2]['function'],
+				'test' => $backtrace[1]['function'],
+				'line' => $backtrace[1]['line'],
+				'file' => $backtrace[1]['file'],
+			);
+		}
+
+		// Store the result of a test
+		if (!isset($this->results[$backtrace[2]['function']]))
+			$this->results[$backtrace[2]['function']] = array();
+
+		$this->results[$backtrace[2]['function']][] = $result;
 	}
 
 	/**
@@ -222,6 +272,17 @@ abstract class TestLibTestCase
 	public function results()
 	{
 		return $this->results;
+	}
+
+	/**
+	 * Return the all the failures of the test case.
+	 *
+	 * @access  public
+	 * @return  array  An array with all the test failures.
+	 */
+	public function failures()
+	{
+		return $this->failures;
 	}
 
 	/**
@@ -268,5 +329,21 @@ abstract class TestLibTestCase
 	public function is_null($var1)
 	{
 		$this->_store_result(is_null($var1));
+	}
+
+	/**
+	 * Test if two values are identical (same value and type). It does not work
+	 * with objects or arrays at the moment. This function should be used
+	 * inside a test case.
+	 *
+	 * TODO: Make it work for objects and arrays too.
+	 *
+	 * @access  public
+	 * @param   mixed  $var1  The first value.
+	 * @param   mixed  $var2  The second value.
+	 */
+	public function is_identical($var1, $var2)
+	{
+		$this->_store_result($var1 === $var2);
 	}
 }
