@@ -7,7 +7,7 @@
 
 	testlib is a simple unit testing library.
 
-	Version: 0.1.3
+	Version: 0.1.4
 
 	Copyright (c) 2010, Frank Smit <frank/61924/nl>
 	All rights reserved.
@@ -350,5 +350,16 @@ abstract class TestLibTestCase
 	public function is_identical($var1, $var2)
 	{
 		$this->_store_result($var1 === $var2);
+	}
+
+	/**
+	 * Test if a value is empty. This function should be used inside a test case.
+	 *
+	 * @access  public
+	 * @param   mixed  $var1  The first value.
+	 */
+	public function is_empty($var1)
+	{
+		$this->_store_result(empty($var1));
 	}
 }
