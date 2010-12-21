@@ -8,17 +8,17 @@ class Utf8IsWordCharsTest extends TestLibTestCase
 {
 	protected $name = 'utf8_is_word_chars()';
 
-	function test_empty_string()
+	protected function test_empty_string()
 	{
 		$this->is_true(utf8_is_word_chars(''));
 	}
 
-	function test_all_word_chars()
+	protected function test_all_word_chars()
 	{
 		$this->is_true(utf8_is_word_chars('HelloWorld'));
 	}
 
-	function test_specials()
+	protected function test_specials()
 	{
 		$str = 'Hello '.
 			chr(0xe0 | (0x2234 >> 12)).

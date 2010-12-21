@@ -8,12 +8,12 @@ class Utf8StripSpecialsTest extends TestLibTestCase
 {
 	protected $name = 'utf8_strip_specials()';
 
-	function test_empty_string()
+	protected function test_empty_string()
 	{
 		$this->is_equal(utf8_strip_specials(''), '');
 	}
 
-	function test_strip()
+	protected function test_strip()
 	{
 		$str = 'Hello '.
 			chr(0xe0 | (0x2234 >> 12)).

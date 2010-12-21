@@ -7,12 +7,12 @@ class Utf8FromUnicodeTest extends TestLibTestCase
 {
 	protected $name = 'utf8_from_unicode()';
 
-	function test_empty_array()
+	protected function test_empty_array()
 	{
 		$this->is_equal(utf8_from_unicode(array()), '');
 	}
 
-	function test_array()
+	protected function test_array()
 	{
 		$unicode = array();
 		$unicode[0] = 73;

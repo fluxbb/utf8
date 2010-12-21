@@ -7,56 +7,56 @@ class Utf8StrIreplaceTest extends TestLibTestCase
 {
 	protected $name = 'utf8_ireplace()';
 
-	function test_replace()
+	protected function test_replace()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'Iñtërnâtiônàlisetiøn';
 		$this->is_equal(utf8_ireplace('lIzÆ', 'lise', $str), $replaced);
 	}
 
-	function test_replace_no_match()
+	protected function test_replace_no_match()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'Iñtërnâtiônàlizætiøn';
 		$this->is_equal(utf8_ireplace('foo', 'bar', $str), $replaced);
 	}
 
-	function test_empty_string()
+	protected function test_empty_string()
 	{
 		$str = '';
 		$replaced = '';
 		$this->is_equal(utf8_ireplace('foo', 'bar', $str), $replaced);
 	}
 
-	function test_empty_search()
+	protected function test_empty_search()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'Iñtërnâtiônàlizætiøn';
 		$this->is_equal(utf8_ireplace('', 'x', $str), $replaced);
 	}
 
-	function test_replace_count()
+	protected function test_replace_count()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'IñtërXâtiôXàlizætiøn';
 		$this->is_equal(utf8_ireplace('n', 'X', $str, 2), $replaced);
 	}
 
-	function test_replace_different_search_replace_length()
+	protected function test_replace_different_search_replace_length()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'IñtërXXXâtiôXXXàlizætiøXXX';
 		$this->is_equal(utf8_ireplace('n', 'XXX', $str), $replaced);
 	}
 
-	function test_replace_array_ascii_search()
+	protected function test_replace_array_ascii_search()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'Iñyërxâyiôxàlizæyiøx';
 		$this->is_equal(utf8_ireplace(array('n', 't'), array('x', 'y'), $str), $replaced);
 	}
 
-	function test_replace_array_utf8_search()
+	protected function test_replace_array_utf8_search()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'I?tërnâti??nàliz????ti???n';
@@ -68,7 +68,7 @@ class Utf8StrIreplaceTest extends TestLibTestCase
 			$replaced);
 	}
 
-	function test_replace_array_string_replace()
+	protected function test_replace_array_string_replace()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'I?tërnâti?nàliz?ti?n';
@@ -80,7 +80,7 @@ class Utf8StrIreplaceTest extends TestLibTestCase
 			$replaced);
 	}
 
-	function test_replace_array_single_array_replace()
+	protected function test_replace_array_single_array_replace()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$replaced = 'I?tërnâtinàliztin';
@@ -92,14 +92,14 @@ class Utf8StrIreplaceTest extends TestLibTestCase
 			$replaced);
 	}
 
-	function test_replace_linefeed()
+	protected function test_replace_linefeed()
 	{
 		$str = "Iñtërnâti\nônàlizætiøn";
 		$replaced = "Iñtërnâti\nônàlisetiøn";
 		$this->is_equal(utf8_ireplace('lIzÆ', 'lise', $str), $replaced);
 	}
 
-	function test_replace_linefeed_search()
+	protected function test_replace_linefeed_search()
 	{
 		$str = "Iñtërnâtiônàli\nzætiøn";
 		$replaced = "Iñtërnâtiônàlisetiøn";

@@ -7,21 +7,21 @@ class Utf8TrimTest extends TestLibTestCase
 {
 	protected $name = 'utf8_trim()';
 
-	function test_trim()
+	protected function test_trim()
 	{
 		$str = 'ñtërnâtiônàlizætiø';
 		$trimmed = 'tërnâtiônàlizæti';
 		$this->is_equal(utf8_trim($str, 'ñø'), $trimmed);
 	}
 
-	function test_no_trim()
+	protected function test_no_trim()
 	{
 		$str = ' Iñtërnâtiônàlizætiøn ';
 		$trimmed = ' Iñtërnâtiônàlizætiøn ';
 		$this->is_equal(utf8_trim($str, 'ñø'), $trimmed);
 	}
 
-	function test_empty_string()
+	protected function test_empty_string()
 	{
 		$str = '';
 		$trimmed = '';

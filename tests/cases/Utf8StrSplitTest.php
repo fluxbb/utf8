@@ -7,7 +7,7 @@ class Utf8StrSplitTest extends TestLibTestCase
 {
 	protected $name = 'utf8_str_split()';
 
-	function test_split_one_char()
+	protected function test_split_one_char()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$array = array(
@@ -18,7 +18,7 @@ class Utf8StrSplitTest extends TestLibTestCase
 		$this->is_equal(utf8_str_split($str), $array);
 	}
 
-	function test_split_five_chars()
+	protected function test_split_five_chars()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$array = array(
@@ -28,7 +28,7 @@ class Utf8StrSplitTest extends TestLibTestCase
 		$this->is_equal(utf8_str_split($str, 5), $array);
 	}
 
-	function test_split_six_chars()
+	protected function test_split_six_chars()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$array = array(
@@ -38,7 +38,7 @@ class Utf8StrSplitTest extends TestLibTestCase
 		$this->is_equal(utf8_str_split($str, 6), $array);
 	}
 
-	function test_split_long()
+	protected function test_split_long()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$array = array(
@@ -48,7 +48,7 @@ class Utf8StrSplitTest extends TestLibTestCase
 		$this->is_equal(utf8_str_split($str, 40), $array);
 	}
 
-	function test_split_newline()
+	protected function test_split_newline()
 	{
 		$str = "Iñtërn\nâtiônàl\nizætiøn\n";
 		$array = array(

@@ -7,7 +7,7 @@ class Utf8PositionTest extends TestLibTestCase
 {
 	protected $name = 'utf8_byte_position(), utf8_locate_current_chr()';
 
-	function test_ascii_char_to_byte()
+	protected function test_ascii_char_to_byte()
 	{
 		$str = 'testing';
 		$this->is_identical(utf8_byte_position($str, 3), 3);
@@ -16,7 +16,7 @@ class Utf8PositionTest extends TestLibTestCase
 		$this->is_identical(utf8_byte_position($str, 8), 7);
 	}
 
-	function test_multibyte_char_to_byte()
+	protected function test_multibyte_char_to_byte()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';
 		$this->is_identical(utf8_byte_position($str, 3), 4);
@@ -26,7 +26,7 @@ class Utf8PositionTest extends TestLibTestCase
 	}
 
 	// Tests for utf8_locate_current_chr & utf8_locate_next_chr
-	function test_singlebyte()
+	protected function test_singlebyte()
 	{
 		$tests   = array();
 
@@ -44,7 +44,7 @@ class Utf8PositionTest extends TestLibTestCase
 			$this->is_identical(utf8_locate_next_chr($test[0], $test[1]), $test[2]);
 	}
 
-	function test_two_byte()
+	protected function test_two_byte()
 	{
 		// Two byte, should move to boundary, expect even number
 		$tests   = array();
@@ -64,7 +64,7 @@ class Utf8PositionTest extends TestLibTestCase
 			$this->is_identical(utf8_locate_next_chr($test[0], $test[1]), $test[2]);
 	}
 
-	function test_threebyte()
+	protected function test_threebyte()
 	{
 		// Three byte, should move to boundary 10 or 13
 		$tests   = array();
@@ -86,7 +86,7 @@ class Utf8PositionTest extends TestLibTestCase
 			$this->is_identical(utf8_locate_next_chr($test[0], $test[1]), $test[2]);
 	}
 
-	function test_bounds()
+	protected function test_bounds()
 	{
 		// Bounds checking
 		$tests   = array();
