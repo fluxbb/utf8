@@ -2,6 +2,8 @@
 
 class Utf8StrlenTest extends TestLibTestCase
 {
+	protected $name = 'utf8_strlen()';
+
     public function test_utf8()
     {
 		$str = 'Iñtërnâtiônàlizætiøn';

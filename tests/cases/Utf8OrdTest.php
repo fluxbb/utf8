@@ -5,6 +5,8 @@ require_once UTF8.'/functions/ord.php';
 
 class Utf8OrdTest extends TestLibTestCase
 {
+	protected $name = 'utf8_ord()';
+
 	function test_empty_str()
 	{
 		$str = '';

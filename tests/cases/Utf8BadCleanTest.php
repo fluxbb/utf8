@@ -5,6 +5,8 @@ require_once UTF8.'/utils/bad.php';
 
 class Utf8BadCleanTest extends TestLibTestCase
 {
+	protected $name = 'utf8_bad_clean()';
+
 	function test_valid_utf8()
 	{
 		$str = 'Iñtërnâtiônàlizætiøn';

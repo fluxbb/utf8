@@ -5,6 +5,8 @@ require_once UTF8.'/utils/ascii.php';
 
 class Utf8ToAsciiTest extends TestLibTestCase
 {
+	protected $name = 'utf8_to_ascii()';
+
 	function test_utf8()
 	{
 		$str = 'testiñg';

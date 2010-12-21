@@ -7,7 +7,7 @@
 
 	testlib is a simple unit testing library.
 
-	Version: 0.1.2
+	Version: 0.1.3
 
 	Copyright (c) 2010, Frank Smit <frank/61924/nl>
 	All rights reserved.
@@ -123,13 +123,13 @@ class TestLib
 		// List all results grouped by test case
 		foreach ($this->testcases as $testcase)
 		{
-			$output .= "\n".$testcase->name()."\n";
+			$output .= "\n".$testcase->get_name()."\n";
 
-			$tmp = $testcase->failures();
+			$tmp = $testcase->get_failures();
 			if (!empty($tmp))
-				$failures[$testcase->name()] = $tmp;
+				$failures[$testcase->get_name()] = $tmp;
 
-			foreach ($testcase->results() as $method => $results)
+			foreach ($testcase->get_results() as $method => $results)
 			{
 				$test_passed = true;
 
@@ -181,6 +181,7 @@ abstract class TestLibTestCase
 	private $methods = array()
 	      , $results = array()
 	      , $failures = array();
+	protected $name;
 
 	/**
 	 * Load all test methods in the current class ans store them.
@@ -253,12 +254,16 @@ abstract class TestLibTestCase
 	}
 
 	/**
-	 * Return the name of the current test case.
+	 * Return the name of the current test case. If no name if specified the
+	 * name of the class will be returned.
 	 *
 	 * @access  public
 	 */
-	public function name()
+	public function get_name()
 	{
+		if (isset($this->name))
+			return $this->name;
+
 		return get_class($this);
 	}
 
@@ -269,7 +274,7 @@ abstract class TestLibTestCase
 	 * @return  array  An array with all the test results. The method name is
 	 *                 is used at the key and the test result is the value.
 	 */
-	public function results()
+	public function get_results()
 	{
 		return $this->results;
 	}
@@ -280,7 +285,7 @@ abstract class TestLibTestCase
 	 * @access  public
 	 * @return  array  An array with all the test failures.
 	 */
-	public function failures()
+	public function get_failures()
 	{
 		return $this->failures;
 	}

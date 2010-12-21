@@ -5,6 +5,8 @@ require_once UTF8.'/utils/ascii.php';
 
 class Utf8AccentsToAsciiTest extends TestLibTestCase
 {
+	protected $name = 'utf8_accents_to_ascii()';
+
 	function test_empty_str()
 	{
 		$this->is_equal(utf8_accents_to_ascii(''), '');

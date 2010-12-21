@@ -5,6 +5,8 @@ require_once UTF8.'/utils/position.php';
 
 class Utf8PositionTest extends TestLibTestCase
 {
+	protected $name = 'utf8_byte_position(), utf8_locate_current_chr()';
+
 	function test_ascii_char_to_byte()
 	{
 		$str = 'testing';
