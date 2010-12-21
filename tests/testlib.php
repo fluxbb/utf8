@@ -336,7 +336,7 @@ abstract class TestLibTestCase
 	 * with objects or arrays at the moment. This function should be used
 	 * inside a test case.
 	 *
-	 * TODO: Make it work for objects and arrays too.
+	 * TODO: Make it work for objects too.
 	 *
 	 * @access  public
 	 * @param   mixed  $var1  The first value.
