@@ -1,5 +1,6 @@
 <?php
 
+require_once UTF8.'/utils/patterns.php'; // Is needed in native mode
 require_once UTF8.'/utils/bad.php';
 
 
