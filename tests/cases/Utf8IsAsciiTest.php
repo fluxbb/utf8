@@ -1,5 +1,8 @@
 <?php
 
+require_once UTF8.'/utils/ascii.php';
+
+
 class Utf8IsAsciiTest extends TestLibTestCase
 {
 	function test_utf8()

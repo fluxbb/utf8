@@ -1,5 +1,8 @@
 <?php
 
+require_once UTF8.'/utils/bad.php';
+
+
 class Utf8BadCleanTest extends TestLibTestCase
 {
 	function test_valid_utf8()

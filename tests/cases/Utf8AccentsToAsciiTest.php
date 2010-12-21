@@ -1,5 +1,7 @@
 <?php
 
+require_once UTF8.'/utils/ascii.php';
+
 
 class Utf8AccentsToAsciiTest extends TestLibTestCase
 {
