@@ -12,9 +12,6 @@ if (isset($_GET['engine']) && ($_GET['engine'] == 'mbstring' || $_GET['engine'] 
 require_once '../php-utf8.php';
 require_once './testlib.php';
 
-
-header('Content-type: text/plain; charset=utf-8');
-
 $tester = new TestLib('php-utf8 Unit Tests ('.PHP_UTF8_MODE.')', './cases');
 
 echo $tester->run_tests()

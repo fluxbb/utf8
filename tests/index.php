@@ -18,8 +18,24 @@ h1 {
   font-size: 3.8em;
   color: #000000;
   margin: 0.5em 0 }
+h2 {
+  font-size: 1.7em;
+  margin: 0.75em 0;
+  line-height: 1.2em }
 a:link, a:visited { color: #000;text-decoration: underline  }
 a:hover, a:active { color: #c00  }
+p, ul, ol, pre { margin: 1.5em 0 }
+pre {
+  background: #000;
+  font-size: 0.8em;
+  color: #fff;
+  padding: 0.8em }
+pre, code {
+  font-family: 'DejaVu Sans Mono', Consolas, Inconsolata, 'Lucida Console', monospace }
+pre {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px }
 	</style>
 </head>
 <body>
@@ -30,10 +46,22 @@ a:hover, a:active { color: #c00  }
 	<p>Choose an option:</p>
 
 	<ul>
-		<li><a href="runtests.php">Run unit tests: Let php-utf8 choose an engine</a></li>
-		<li><a href="runtests.php?engine=mbstring">Run unit tests: Mbtring</a></li>
-		<li><a href="runtests.php?engine=native">Run unit tests: Native</a></li>
+		<li><a href="index.php?run">Run unit tests: Automatic</a></li>
+		<li><a href="index.php?run&engine=mbstring">Run unit tests: Mbtring</a></li>
+		<li><a href="index.php?run&engine=native">Run unit tests: Native</a></li>
 	</ul>
+
+
+<?php
+
+if (isset($_GET['run']))
+{
+	echo '<h2>Report</h2>'."\n\n".'<pre><code>';
+	require './runtests.php';
+	echo '</code></pre>';
+}
+
+?>
 </div>
 
 </body>
