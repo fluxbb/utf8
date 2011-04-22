@@ -9,28 +9,34 @@
  * @param string $str the input string
  * @param int $width the column width
  * @param string $break the line is broken using the optional break parameter
- * @param bool $cut if the cut is set to TRUE, the string is always wrapped at
- * or before the specified width. So if you have a word that is larger than the
- * given width, it is broken apart.
  * @return string the given string wrapped at the specified column
  * @package php-utf8
  * @subpackage functions
  */
-function utf8_wordwrap($str, $width = 75, $break = "\n", $cut = false)
+function utf8_wordwrap($str, $width = 75, $break = "\n")
 {
-	$regexp = '%^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){'.$width.',}'.($cut ? '%' : '\b%U');
-	$wrapped_str = '';
+	$lines = array();
 
-	while (preg_match($regexp, $str, $matches) === 1)
+	while (!empty($str))
 	{
-		// Append it to the output, followed by a linebreak
-		$wrapped_str .= $matches[0].$break;
-		// Trim it off the input ready for the next go
-		$str = substr($str, strlen($matches[0]));
+		// We got a line with a break in it somewhere before the end
+		if (preg_match('%^(.{1,'.$width.'})(?:\s|$)%', $str, $matches))
+		{
+			// Add this line to the output
+			$lines[] = $matches[1];
+
+			// Trim it off the input ready for the next go
+			$str = substr($str, strlen($matches[0]));
+		}
+		// Just take the next $width characters
+		else
+		{
+			$lines[] = substr($str, 0, $width);
+
+			// Trim it off the input ready for the next go
+			$str = substr($str, $width);
+		}
 	}
 
-	// Add the final part on the end
-	$wrapped_str .= $str;
-
-	return $wrapped_str;
+	return implode($break, $lines);
 }
