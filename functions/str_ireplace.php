@@ -31,7 +31,7 @@ function utf8_ireplace($search, $replace, $str, $count = null)
 		$lendif = strlen($replace) - strlen($search);
 		$search = utf8_strtolower($search);
 
-		$search = preg_quote($search,'/');
+		$search = preg_quote($search, '/');
 		$lstr = utf8_strtolower($str);
 		$i = 0;
 		$matched = 0;
